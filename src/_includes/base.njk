@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title }}</title>
+  <meta name="description" content="Settings and step-by-step instructions for the Dutch Meshcore community SF7 switch.">
+  <meta property="og:title" content="{{ title }}">
+  <meta property="og:description" content="Community-wide radio settings change — action required from all operators.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23D42B2B'/><text y='.85em' font-size='72' font-family='sans-serif' fill='white' font-weight='900' text-anchor='middle' x='50'>M</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Barlow:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/main.css">
+</head>
+<body>
+  <div class="page-stripe" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="container">
+      <div class="site-header__inner">
+        <a href="/" class="site-header__name">Dutch Meshcore</a>
+        <nav class="site-header__nav" aria-label="Resources">
+          <a href="https://assets.woodwar.com/meshcore_sf_test_plan.pdf" target="_blank" rel="noopener" class="site-header__link">Test plan <span aria-hidden="true">↗</span></a>
+          <a href="https://assets.woodwar.com/meshcore_sf_test_report.pdf" target="_blank" rel="noopener" class="site-header__link">Test report <span aria-hidden="true">↗</span></a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="site-main" id="main-content">
+    <div class="container">
+      <section class="hero">
+        <h1 class="hero__title">{{ title | safe }}</h1>
+        {% if description %}
+        <p class="hero__desc">{{ description | safe }}</p>
+        {% endif %}
+      </section>
+      {{ content | safe }}
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__inner">
+        <p class="site-footer__text">Dutch Meshcore community · Based on the SF test weekend results (6–8 March 2026)</p>
+        <p class="site-footer__text">Questions? Ask in the community chat.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script defer src="/assets/main.js"></script>
+</body>
+</html>

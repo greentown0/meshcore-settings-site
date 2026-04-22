@@ -1,0 +1,19 @@
+{
+  "name": "meshcore-settings-site",
+  "version": "1.0.0",
+  "description": "Dutch Meshcore SF7 settings — static site",
+  "private": true,
+  "scripts": {
+    "build": "eleventy",
+    "start": "eleventy --serve"
+  },
+  "dependencies": {
+    "@11ty/eleventy": "^2.0.1",
+    "markdown-it": "^14.1.0",
+    "markdown-it-attrs": "^4.1.6",
+    "markdown-it-container": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

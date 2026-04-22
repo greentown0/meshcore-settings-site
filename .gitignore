@@ -1,0 +1,6 @@
+node_modules/
+_site/
+.env
+*.pdf
+generate_switch_instructions.py
+prompts.txt
