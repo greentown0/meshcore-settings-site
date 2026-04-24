@@ -125,49 +125,28 @@ Bandwidth:  62.5 kHz
 ```
 :::
 
-## Checklist
-
-<div class="checklist-wrap">
-
-**Before switch day — confirm you have completed the preparation steps:**
-
-<ul>
-<li>Step 1 — Firmware updated to v1.15 or later on repeater and companion app</li>
-<li>Step 2 — Flood advert interval ≥ 50 hours; zero-hop adverts = 240 minutes</li>
-<li>Step 3 — Bots and auto-reply scripts stopped; node not listed on mc-radar.woodwar.com/mesh-health</li>
-<li>Step 4 — Region scoping configured: <code>eu</code>, <code>nl</code>, <code>province</code>; default region on repeater <code>province</code>; default region on companion <code>nl</code></li>
-<li>Step 5 — Multi-byte path: companion Default Path Hash Size = 2-byte; repeater CLI: <code>set path.hash.mode 1</code></li>
-<li>Step 6 — Loop detection: <code>set loop.detect minimal</code>; airtime factor: <code>set af 9</code></li>
-</ul>
-
-**On switch day (TBC — tentative 9 May 2026):**
-
-<ul class="switch-day-items">
-<li>Step 7 — Apply Netherlands preset (SF7/CR5, 869.618 MHz, 62.5 kHz)</li>
-<li>Apply <code>region denyf *</code> followed by <code>region save</code></li>
-<li>Confirm you can hear your neighbours on the new settings</li>
-</ul>
-
-</div>
-
 ## Resources
 
 <div class="resources">
-  <a href="https://assets.woodwar.com/meshcore_sf_test_plan.pdf" target="_blank" rel="noopener" class="resource-link">
-    SF Test Plan
+  <a href="https://assets.woodwar.com/meshcore_sf7_switch_instructions.pdf" target="_blank" rel="noopener" class="resource-link">
+    Switch instructions
     <span class="resource-link__arrow">PDF document ↗</span>
-  </a>
-  <a href="https://assets.woodwar.com/meshcore_sf_test_report.pdf" target="_blank" rel="noopener" class="resource-link">
-    SF Test Report
-    <span class="resource-link__arrow">Full analysis ↗</span>
-  </a>
-  <a href="https://meshwiki.nl/wiki/Lijst_van_regio%27s" target="_blank" rel="noopener" class="resource-link">
-    Region codes list
-    <span class="resource-link__arrow">meshwiki.nl ↗</span>
   </a>
   <a href="https://mc-radar.woodwar.com/mesh-health" target="_blank" rel="noopener" class="resource-link">
     Mesh health check
     <span class="resource-link__arrow">mc-radar.woodwar.com ↗</span>
+  </a>
+  <a href="https://cornmeister.nl/" target="_blank" rel="noopener" class="resource-link">
+    Mesh status
+    <span class="resource-link__arrow">cornmeister.nl ↗</span>
+  </a>
+  <a href="https://analyzer.letsmesh.net/" target="_blank" rel="noopener" class="resource-link">
+    Mesh analyser
+    <span class="resource-link__arrow">analyzer.letsmesh.net ↗</span>
+  </a>
+  <a href="https://meshwiki.nl/wiki/Lijst_van_regio%27s" target="_blank" rel="noopener" class="resource-link">
+    Region codes list
+    <span class="resource-link__arrow">meshwiki.nl ↗</span>
   </a>
   <a href="https://www.mesh-up.nl/tools/regiocodes-instellen/" target="_blank" rel="noopener" class="resource-link">
     Region configurator
