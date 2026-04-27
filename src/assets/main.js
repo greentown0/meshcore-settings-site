@@ -4,7 +4,7 @@
   // ── Wrap preparation steps (all except #step-07) in a CSS grid ───────────
   // Steps are siblings in the DOM; we group them here so no markdown
   // container is needed (which would conflict with the :::step depth tracking).
-  var prepSteps = Array.from(document.querySelectorAll(".step:not(#step-07)"));
+  var prepSteps = Array.from(document.querySelectorAll(".step:not(#step-07):not(#step-08)"));
   if (prepSteps.length > 0) {
     var wrapper = document.createElement("div");
     wrapper.className = "steps-prep";

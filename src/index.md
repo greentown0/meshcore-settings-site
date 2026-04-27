@@ -1,7 +1,7 @@
 ---
 layout: base.njk
 title: Dutch Meshcore — SF7 Settings
-description: "Community-wide switch · Tentative date: 9 May 2026"
+description: "Community-wide switch · 9 May 2026"
 ---
 
 ## Settings at a glance
@@ -54,7 +54,9 @@ Visit [mc-radar.woodwar.com/mesh-health](https://mc-radar.woodwar.com/mesh-healt
 :::
 
 ::: step 04 "Region scoping" "eu · nl · province"
-Configure region scoping on both your **repeater** and your **companion app**. This is the single most impactful change you can make to reduce congestion.
+Configure region scoping on both your **repeater** and your **companion app**. This is one of the most impactful changes you can make to reduce congestion.
+
+Two repeater tasks to complete now: **A.1** — add region codes, and **A.2** — set your default region. Step A.3 (blocking unscoped packets) is a separate phase scheduled for **13 June 2026** — do not apply it yet.
 
 Community tools make this easy:
 - [All-in-one configurator →](https://www.mesh-up.nl/tools/regiocodes-instellen/)
@@ -65,7 +67,7 @@ Community tools make this easy:
 
 Province codes: `nl-gr` · `nl-fr` · `nl-dr` · `nl-ov` · `nl-fl` · `nl-ge` · `nl-ut` · `nl-nh` · `nl-zh` · `nl-ze` · `nl-nb` · `nl-li`
 
-**⚠ Only run `region denyf *` on or after switch day.** Running it earlier will cause your repeater to drop messages from nodes that have not yet completed the transition.
+**⚠ Step A.3 (`region denyf *`) is Phase 8 — 13 June 2026.** Do not run it on switch day. Enabling it before then will cause your repeater to drop messages from nodes that have not yet configured region scoping.
 
 ::: cli "Repeater CLI"
 ```
@@ -76,7 +78,7 @@ region put YOUR_CITY
 region default YOUR_REGION
 region save
 
-# On switch day only — run after switching radio:
+# Phase 8 only (13 June 2026):
 region denyf *
 region save
 ```
@@ -107,7 +109,7 @@ Options: `off` (default) · `minimal` · `moderate` · `strict` — `minimal` is
 
 ## Switch day
 
-Switch date: **TBC — tentative 9 May 2026.** Only step 7 needs to happen on the agreed date.
+Switch date: **9 May 2026.** Only step 7 needs to happen on the agreed date.
 
 ::: step 07 "Switch radio settings" "SF7 / CR5"
 In the Meshcore app, open your repeater settings and select the **Netherlands** radio preset. This preset configures all parameters automatically.
@@ -124,6 +126,52 @@ Frequency:  869.618 MHz
 Bandwidth:  62.5 kHz
 ```
 :::
+
+## Phase 8 — Strict region forwarding
+
+Approximately one month after the main switch, the community will enable strict region forwarding. This turns the mesh into connected regional zones — problems or congestion in one area no longer cascade across the whole network, and adverts are scoped to their region.
+
+Phase 8 date: **13 June 2026.** Only step 8 needs to happen on this date.
+
+::: step 08 "Strict region forwarding" "13 Jun 2026"
+Apply the final region command on your repeater. This instructs your repeater to silently drop any incoming packet that carries no region scope — from this point, every message entering your repeater must carry an explicit region tag. This creates a strong incentive for all operators to configure regions correctly, and results in a more stable and reliable mesh for the whole community.
+
+From the **UI**: In the Manage Regions screen, set **Deny Flood** in the **Packets without region set** option.
+
+::: cli "Repeater CLI"
+```
+region denyf *
+region save
+```
+:::
+
+## Checklist
+
+<div class="checklist-wrap checklist-wrap--green">
+  <p><strong>Before switch day — confirm you have completed the preparation steps:</strong></p>
+  <ul>
+    <li>Step 1: Firmware updated to v1.15 or later — repeater and companion app</li>
+    <li>Step 2: Flood advert interval ≥ 50 h; zero-hop adverts 240 min</li>
+    <li>Step 3: Bots and auto-reply scripts stopped; mc-radar.woodwar.com/mesh-health checked</li>
+    <li>Step 4: Region scoping configured (A.1 + A.2) on repeater and companion app</li>
+    <li>Step 5: Multi-byte path — companion app Default Path Hash Size = 2-byte; repeater CLI: <code>set path.hash.mode 1</code></li>
+    <li>Step 6: Loop detection — <code>set loop.detect minimal</code>; airtime factor — <code>set af 9</code></li>
+  </ul>
+  <p><strong>Switch day (9 May 2026):</strong></p>
+  <ul class="switch-day-items">
+    <li>Step 7: Apply the Netherlands radio preset (SF7 / CR5, 869.618 MHz, 62.5 kHz)</li>
+    <li>Confirm you can hear your neighbours on the new settings</li>
+  </ul>
+</div>
+
+<div class="checklist-wrap checklist-wrap--purple">
+  <p><strong>Phase 8 — Strict region forwarding (13 June 2026):</strong></p>
+  <ul class="switch-day-items">
+    <li>All preparation steps (1–6) completed</li>
+    <li>Step 4 region scoping (A.1 + A.2) confirmed working — channels scoped correctly</li>
+    <li>Step 8: Apply strict region forwarding on your repeater (<code>region denyf *</code>)</li>
+  </ul>
+</div>
 
 ## Resources
 

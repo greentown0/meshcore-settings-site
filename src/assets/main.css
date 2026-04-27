@@ -1,12 +1,16 @@
 /* ── Custom properties ────────────────────────────────────────────────────── */
 :root {
-  --c-bg:       #FFFFFF;
-  --c-fg:       #0A0A0A;
-  --c-red:      #D42B2B;
-  --c-muted:    #5E5E5E;
-  --c-rule:     #E0E0E0;
-  --c-fill:     #F7F6F4;
-  --c-code-bg:  #F2F0EC;
+  --c-bg:         #FFFFFF;
+  --c-fg:         #0A0A0A;
+  --c-red:        #D42B2B;
+  --c-muted:      #5E5E5E;
+  --c-rule:       #E0E0E0;
+  --c-fill:       #F7F6F4;
+  --c-code-bg:    #F2F0EC;
+  --c-green:      #218638;
+  --c-green-bg:   #E8F5E9;
+  --c-purple:     #6A1B9A;
+  --c-purple-bg:  #F3E5F5;
 
   --f-display:  'Barlow Condensed', sans-serif;
   --f-body:     'Barlow', sans-serif;
@@ -268,13 +272,27 @@ h2 {
   opacity: 0.85;
 }
 
-/* Switch day step — full-width, accented */
+/* Switch day step — full-width, red accented */
 #step-07 {
   border-top: 3px solid var(--c-red);
   background: #FEF9F9;
   margin-top: 1rem;
   border: 1px solid var(--c-rule);
   border-top: 3px solid var(--c-red);
+}
+
+/* Phase 8 step — full-width, purple accented */
+#step-08 {
+  background: #FAF5FE;
+  margin-top: 1rem;
+  border: 1px solid var(--c-rule);
+  border-top: 3px solid var(--c-purple);
+}
+#step-08 .step__num {
+  color: var(--c-purple);
+}
+#step-08 .step__summary {
+  color: var(--c-purple);
 }
 
 /* ── :::more popover ─────────────────────────────────────────────────────── */
@@ -497,6 +515,21 @@ h2 {
 .checklist-wrap .switch-day-items li::before {
   color: var(--c-red);
   content: '☐';
+}
+.checklist-wrap--green {
+  border-left-color: var(--c-green);
+  background: var(--c-green-bg);
+}
+.checklist-wrap--green .switch-day-items li::before {
+  color: var(--c-green);
+}
+.checklist-wrap--purple {
+  border-left-color: var(--c-purple);
+  background: var(--c-purple-bg);
+  margin-top: 1rem;
+}
+.checklist-wrap--purple li::before {
+  color: var(--c-purple);
 }
 
 /* ── Resources / links ───────────────────────────────────────────────────── */
