@@ -25,7 +25,7 @@ The steps below are a compressed version of the [full switch instructions (PDF) 
 
 
 ::: step 01 "Firmware" "v1.15+"
-Update **both** your repeater firmware and companion app to version **1.15 or later** before making any other changes.
+Update **both** your repeater firmware (**1.15 or later**) and companion app before making any other changes.
 
 ::: more "Why v1.15?"
 Version 1.15 is the minimum required for this switch:
@@ -96,16 +96,16 @@ set path.hash.mode 1
 ```
 :::
 
-::: step 06 "Loop detection" "set af 9"
+::: step 06 "Loop detection" "set dutycycle 10"
 Enable loop detection and enforce airtime limits. Run in the repeater CLI:
-`set loop.detect minimal` and `set af 9`.
+`set loop.detect minimal` and `set dutycycle 10`.
 
 ::: more "What do these commands do?"
 **`set loop.detect minimal`** — Rejects flood packets that appear to be looping across the mesh. A faulty node can cause a packet to circulate up to the 64-hop limit, consuming significant airtime. The `minimal` setting catches clear loops without false positives.
 
 Options: `off` (default) · `minimal` · `moderate` · `strict` — `minimal` is the recommended starting point.
 
-**`set af 9`** — Enforces 10% duty cycle (value 9 = 10%). This is a **legal requirement** for operation in Europe on the 868 MHz sub-band used by Meshcore.
+**`set dutycycle 10`** — Enforces 10% duty cycle. This is a **legal requirement** for operation in Europe on the 868 MHz sub-band used by Meshcore.
 :::
 
 ## Switch day
@@ -156,7 +156,7 @@ region save
     <li>Step 3: Bots and auto-reply scripts stopped; mc-radar.woodwar.com/mesh-health checked</li>
     <li>Step 4: Region scoping configured (A.1 + A.2) on repeater and companion app</li>
     <li>Step 5: Multi-byte path — companion app Default Path Hash Size = 2-byte; repeater CLI: <code>set path.hash.mode 1</code></li>
-    <li>Step 6: Loop detection — <code>set loop.detect minimal</code>; airtime factor — <code>set af 9</code></li>
+    <li>Step 6: Loop detection — <code>set loop.detect minimal</code>; airtime factor — <code>set dutycycle 10</code></li>
   </ul>
   <p><strong>Switch day (9 May 2026):</strong></p>
   <ul class="switch-day-items">
