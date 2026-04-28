@@ -126,9 +126,8 @@ SF / CR:    SF7 / CR5
 Frequency:  869.618 MHz
 Bandwidth:  62.5 kHz
 ```
-In cases of weak connections after the new settings are applied, changing the coding rate manually from CR5 to CR8 can improve stability at the expense of higher airtime usage. This improvement is applied to the transmission of the configured node, by adding extra error correction information and it will not improve reception. The improvement will be marginal, and a better placed or better quality antenna would produce a more noticeable effect.
 :::
-
+In cases of weak connections after the new settings are applied, changing the coding rate manually from CR5 to CR8 can improve stability at the expense of higher airtime usage. This improvement is applied to the transmission of the configured node, by adding extra error correction information and it will not improve reception. The improvement will be marginal, and a better placed or better quality antenna would produce a more noticeable effect.
 ## Phase 8 — Strict region forwarding
 
 Approximately one month after the main switch, the community will enable strict region forwarding. This turns the mesh into connected regional zones — problems or congestion in one area no longer cascade across the whole network, and adverts are scoped to their region.
