@@ -21,6 +21,9 @@ description: "Community-wide switch · 9 May 2026"
 
 Steps 1–6 can be completed **before switch day**, at your own pace.
 
+The steps below are a compressed version of the [full switch instructions (PDF) ↗](https://assets.woodwar.com/meshcore_sf7_switch_instructions.pdf).
+
+
 ::: step 01 "Firmware" "v1.15+"
 Update **both** your repeater firmware and companion app to version **1.15 or later** before making any other changes.
 
@@ -37,6 +40,8 @@ Updates also include improvements to congestion handling.
 Set your **flood advert interval to 50 hours** or more. Zero-hop adverts should be **240 minutes** (4 hours).
 
 ::: more "Flood vs zero-hop adverts"
+Visit [mc-radar.woodwar.com/mesh-health](https://mc-radar.woodwar.com/mesh-health) to check whether your node is listed. Nodes there have an advert interval that is too short and are causing unnecessary load on the mesh. If yours appears, fix it before the switch.
+
 **Flood adverts** travel across the entire mesh and announce your repeater to the full network. Sending them too often is a leading cause of congestion. Set to at least **50 hours** — higher is fine.
 
 **Zero-hop adverts** are heard only by your immediate neighbours. **240 minutes** (4 hours) is the recommended interval.
@@ -47,10 +52,6 @@ Both settings are in your repeater's administration screen.
 ::: step 03 "Stop bots & scripts" "No auto-messages"
 Review and stop any automated integrations — Home Assistant, custom scripts, auto-reply bots in shared channels such as **#test**.
 
-::: more "Quick check"
-Visit [mc-radar.woodwar.com/mesh-health](https://mc-radar.woodwar.com/mesh-health) to check whether your node is listed. Nodes there have an advert interval that is too short and are causing unnecessary load on the mesh. If yours appears, fix it before the switch.
-
-**Auto-reply bots in shared channels are a significant congestion source** and should be stopped entirely before switch day.
 :::
 
 ::: step 04 "Region scoping" "eu · nl · province"
