@@ -1,13 +1,16 @@
 <!doctype html>
-<html lang="en">
+<html lang="{{ lang | default('en') }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ title }}</title>
-  <meta name="description" content="Settings and step-by-step instructions for the Dutch Meshcore community SF7 switch.">
+  <meta name="description" content="{{ description }}">
   <meta property="og:title" content="{{ title }}">
-  <meta property="og:description" content="Community-wide radio settings change — action required from all operators.">
+  <meta property="og:description" content="{{ description }}">
   <meta property="og:type" content="website">
+  <link rel="alternate" hreflang="en" href="/en/">
+  <link rel="alternate" hreflang="nl" href="/nl/">
+  <link rel="alternate" hreflang="x-default" href="/">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23D42B2B'/><text y='.85em' font-size='72' font-family='sans-serif' fill='white' font-weight='900' text-anchor='middle' x='50'>M</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,10 +23,20 @@
   <header class="site-header">
     <div class="container">
       <div class="site-header__inner">
-        <a href="/" class="site-header__name">Dutch Meshcore</a>
-        <nav class="site-header__nav" aria-label="Resources">
-          <a href="https://assets.woodwar.com/meshcore_sf7_switch_instructions.pdf" target="_blank" rel="noopener" class="site-header__link">Switch instructions <span aria-hidden="true">↗</span></a>
-        </nav>
+        <a href="/{{ lang | default('en') }}/" class="site-header__name">Dutch Meshcore</a>
+        <div class="site-header__actions">
+          <a href="https://assets.woodwar.com/meshcore_sf7_switch_instructions.pdf" target="_blank" rel="noopener" class="site-header__link">
+            {{ nav_switch_link }} <span aria-hidden="true">↗</span>
+          </a>
+          <span class="site-header__sep" aria-hidden="true"></span>
+          <nav class="lang-switcher" aria-label="{{ lang_switcher_aria_label }}">
+            {% if lang == 'nl' %}
+            <a href="/en/" class="lang-switcher__btn" lang="en" hreflang="en">EN</a>
+            {% else %}
+            <a href="/nl/" class="lang-switcher__btn" lang="nl" hreflang="nl">NL</a>
+            {% endif %}
+          </nav>
+        </div>
       </div>
     </div>
   </header>
@@ -43,8 +56,8 @@
   <footer class="site-footer">
     <div class="container">
       <div class="site-footer__inner">
-        <p class="site-footer__text">Dutch Meshcore community · Based on the SF test weekend results (6–8 March 2026)</p>
-        <p class="site-footer__text">Questions? Ask in the community chat.</p>
+        <p class="site-footer__text">{{ footer_community }}</p>
+        <p class="site-footer__text">{{ footer_questions | safe }}</p>
       </div>
     </div>
   </footer>

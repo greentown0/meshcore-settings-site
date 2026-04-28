@@ -73,10 +73,16 @@ button { font-family: inherit; cursor: pointer; }
   transition: color 0.1s;
 }
 .site-header__name:hover { color: var(--c-red); }
-.site-header__nav {
+.site-header__actions {
   display: flex;
-  gap: 1.5rem;
+  gap: 1.25rem;
   align-items: center;
+}
+.site-header__sep {
+  width: 1px;
+  height: 1rem;
+  background: var(--c-rule);
+  flex-shrink: 0;
 }
 .site-header__link {
   font-family: var(--f-body);
@@ -88,6 +94,30 @@ button { font-family: inherit; cursor: pointer; }
   transition: color 0.1s;
 }
 .site-header__link:hover { color: var(--c-red); }
+
+/* ── Language switcher ───────────────────────────────────────────────────── */
+.lang-switcher {
+  display: flex;
+  gap: 0.125rem;
+  align-items: center;
+}
+.lang-switcher__btn {
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+  font-family: var(--f-body);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--c-muted);
+  padding: 0.25em 0.4em;
+  border-radius: 3px;
+  transition: color 0.1s, background-color 0.1s;
+  line-height: 1;
+}
+.lang-switcher__btn:hover { color: var(--c-fg); }
 
 /* ── Hero ────────────────────────────────────────────────────────────────── */
 .hero {

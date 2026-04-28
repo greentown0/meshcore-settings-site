@@ -1,0 +1,22 @@
+---
+permalink: /index.html
+eleventyExcludeFromCollections: true
+---
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dutch Meshcore</title>
+  <meta http-equiv="refresh" content="0; url=/en/">
+  <script>
+    (function () {
+      var lang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+      window.location.replace(lang === 'nl' || lang.startsWith('nl-') ? '/nl/' : '/en/');
+    }());
+  </script>
+</head>
+<body>
+  <p><a href="/en/">English</a> · <a href="/nl/">Nederlands</a></p>
+</body>
+</html>

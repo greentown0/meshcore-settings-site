@@ -1,6 +1,11 @@
 (function () {
   "use strict";
 
+  var isNl = document.documentElement.lang === "nl";
+  var copyLabel   = isNl ? "Kopieer"      : "Copy";
+  var copiedLabel = isNl ? "Gekopieerd!"  : "Copied!";
+  var copyAriaLabel = isNl ? "Kopieer opdrachten" : "Copy commands";
+
   // ── Wrap preparation steps (all except #step-07) in a CSS grid ───────────
   // Steps are siblings in the DOM; we group them here so no markdown
   // container is needed (which would conflict with the :::step depth tracking).
@@ -14,16 +19,18 @@
 
   // ── Copy-to-clipboard for .cli blocks ───────────────────────────────────
   document.querySelectorAll(".cli__copy").forEach(function (btn) {
+    btn.textContent = copyLabel;
+    btn.setAttribute("aria-label", copyAriaLabel);
     btn.addEventListener("click", function () {
       var code = btn.closest(".cli").querySelector(".cli__code code");
       if (!code) return;
       navigator.clipboard
         .writeText(code.textContent.trim())
         .then(function () {
-          btn.textContent = "Copied!";
+          btn.textContent = copiedLabel;
           btn.classList.add("copied");
           setTimeout(function () {
-            btn.textContent = "Copy";
+            btn.textContent = copyLabel;
             btn.classList.remove("copied");
           }, 1600);
         })
