@@ -25,7 +25,7 @@ The steps below are a compressed version of the [full switch instructions (PDF) 
 
 
 ::: step 01 "Firmware" "v1.15+"
-Update **both** your repeater firmware (**1.15 or later**) and companion app before making any other changes.
+Update **both** your repeater and companion firmware to **v1.15+** and make sure you are using the latest version of the mobile app.
 
 ::: more "Why v1.15?"
 Version 1.15 is the minimum required for this switch:
