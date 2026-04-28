@@ -36,36 +36,7 @@
     });
   });
 
-  // ── Hover-to-open popovers (desktop) ────────────────────────────────────
   var supportsPopover = "popover" in HTMLElement.prototype;
-
-  document.querySelectorAll(".more__trigger").forEach(function (trigger) {
-    var popoverId = trigger.getAttribute("popovertarget");
-    var popover = document.getElementById(popoverId);
-    if (!popover) return;
-
-    if (supportsPopover) {
-      var leaveTimer;
-
-      trigger.addEventListener("mouseenter", function () {
-        clearTimeout(leaveTimer);
-        try { popover.showPopover(); } catch (_) {}
-      });
-      trigger.addEventListener("mouseleave", function () {
-        leaveTimer = setTimeout(function () {
-          try { popover.hidePopover(); } catch (_) {}
-        }, 220);
-      });
-      popover.addEventListener("mouseenter", function () {
-        clearTimeout(leaveTimer);
-      });
-      popover.addEventListener("mouseleave", function () {
-        leaveTimer = setTimeout(function () {
-          try { popover.hidePopover(); } catch (_) {}
-        }, 220);
-      });
-    }
-  });
 
   // ── Popover polyfill for browsers without native support ─────────────────
   if (!supportsPopover) {
