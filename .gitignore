@@ -4,3 +4,4 @@ _site/
 *.pdf
 generate_switch_instructions.py
 prompts.txt
+CLAUDE.md

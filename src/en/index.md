@@ -55,9 +55,9 @@ Review and stop any automated integrations — Home Assistant, custom scripts, a
 :::
 
 ::: step 04 "Region scoping" "eu · nl · province"
-Configure region scoping on both your **repeater** and your **companion app**. This is one of the most impactful changes you can make to reduce congestion.
+Configure regions on your **repeater** and set scope in your **companion app**. This is one of the most impactful changes you can make to reduce congestion.
 
-Two repeater tasks to complete now: **A.1** — add region codes, and **A.2** — set your default region. Step A.3 (blocking unscoped packets) is a separate phase scheduled for **13 June 2026** — do not apply it yet.
+Two tasks to complete now: add your region codes to the repeater and set your default region. Blocking unscoped packets (strict forwarding) is a separate phase scheduled for **13 June 2026** — do not apply it yet.
 
 Community tools make this easy:
 - [All-in-one configurator →](https://www.mesh-up.nl/tools/regiocodes-instellen/)
@@ -68,15 +68,15 @@ Community tools make this easy:
 
 Province codes: `nl-gr` · `nl-fr` · `nl-dr` · `nl-ov` · `nl-fl` · `nl-ge` · `nl-ut` · `nl-nh` · `nl-zh` · `nl-ze` · `nl-nb` · `nl-li`
 
-**⚠ Step A.3 (`region denyf *`) is Phase 8 — 13 June 2026.** Do not run it on switch day. Enabling it before then will cause your repeater to drop messages from nodes that have not yet configured region scoping.
+**⚠ `region denyf *` is Phase 8 — 13 June 2026.** Do not run it on switch day. Enabling it before then will cause your repeater to drop messages from nodes that have not yet configured region scoping.
 
 ::: cli "Repeater CLI"
 ```
 region put eu
 region put nl
-region put YOUR_REGION
+region put YOUR_PROVINCE
 region put YOUR_CITY
-region default YOUR_REGION
+region default YOUR_PROVINCE
 region save
 
 # Phase 8 only (13 June 2026):
@@ -113,7 +113,7 @@ Options: `off` (default) · `minimal` · `moderate` · `strict` — `minimal` is
 Switch date: **9 May 2026.** Only step 7 needs to happen on the agreed date.
 
 ::: step 07 "Switch radio settings" "SF7 / CR5"
-In the Meshcore app, open your repeater settings and select the **Netherlands** radio preset. This preset configures all parameters automatically.
+In the Meshcore app, open your repeater settings and select the **Netherlands** radio preset. This preset automatically configures all radio parameters — SF, coding rate, frequency, and bandwidth.
 
 Only the spreading factor and coding rate change — the frequency (869.618 MHz) is identical to the current SF8 setting.
 
@@ -154,7 +154,7 @@ region save
     <li>Step 1: Firmware updated to v1.15 or later — repeater and companion app</li>
     <li>Step 2: Flood advert interval ≥ 50 h; zero-hop adverts 240 min</li>
     <li>Step 3: Bots and auto-reply scripts stopped; mc-radar.woodwar.com/mesh-health checked</li>
-    <li>Step 4: Region scoping configured (A.1 + A.2) on repeater and companion app</li>
+    <li>Step 4: Regions configured on repeater and scope set in companion app</li>
     <li>Step 5: Multi-byte path — companion app Default Path Hash Size = 2-byte; repeater CLI: <code>set path.hash.mode 1</code></li>
     <li>Step 6: Loop detection — <code>set loop.detect minimal</code>; airtime factor — <code>set dutycycle 10</code></li>
   </ul>
@@ -169,7 +169,7 @@ region save
   <p><strong>Phase 8 — Strict region forwarding (13 June 2026):</strong></p>
   <ul class="switch-day-items">
     <li>All preparation steps (1–6) completed</li>
-    <li>Step 4 region scoping (A.1 + A.2) confirmed working — channels scoped correctly</li>
+    <li>Step 4 region scoping confirmed working — channels scoped correctly</li>
     <li>Step 8: Apply strict region forwarding on your repeater (<code>region denyf *</code>)</li>
   </ul>
 </div>

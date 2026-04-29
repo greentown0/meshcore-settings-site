@@ -55,9 +55,9 @@ Controleer en stop geautomatiseerde integraties — Home Assistant, eigen script
 :::
 
 ::: step 04 "Regioscoping" "eu · nl · provincie"
-Configureer regioscoping op zowel je **repeater** als je **companion app**. Dit is een van de meest effectieve wijzigingen om congestie te verminderen.
+Configureer regio's op je **repeater** en stel scope in via je **companion app**. Dit is een van de meest effectieve wijzigingen om congestie te verminderen.
 
-Twee repeater-taken nu uit te voeren: **A.1** — regiocodes toevoegen, en **A.2** — je standaardregio instellen. Stap A.3 (ongescopede pakketten blokkeren) is een aparte fase gepland voor **13 juni 2026** — pas dit nog niet toe.
+Twee taken nu uit te voeren: regiocodes toevoegen aan je repeater en je standaardregio instellen. Ongescopede pakketten blokkeren (strikte doorsturing) is een aparte fase gepland voor **13 juni 2026** — pas dit nog niet toe.
 
 Community-tools maken dit eenvoudig:
 - [All-in-one configurator →](https://www.mesh-up.nl/tools/regiocodes-instellen/)
@@ -68,15 +68,15 @@ Community-tools maken dit eenvoudig:
 
 Provinciecodes: `nl-gr` · `nl-fr` · `nl-dr` · `nl-ov` · `nl-fl` · `nl-ge` · `nl-ut` · `nl-nh` · `nl-zh` · `nl-ze` · `nl-nb` · `nl-li`
 
-**⚠ Stap A.3 (`region denyf *`) is Fase 8 — 13 juni 2026.** Voer dit niet uit op de schakeldag. Dit te vroeg inschakelen zorgt ervoor dat je repeater berichten van nodes zonder regioscoping weigert.
+**⚠ `region denyf *` is Fase 8 — 13 juni 2026.** Voer dit niet uit op de schakeldag. Dit te vroeg inschakelen zorgt ervoor dat je repeater berichten van nodes zonder regioscoping weigert.
 
 ::: cli "Repeater CLI"
 ```
 region put eu
 region put nl
-region put JOUW_REGIO
+region put JOUW_PROVINCIE
 region put JOUW_STAD
-region default JOUW_REGIO
+region default JOUW_PROVINCIE
 region save
 
 # Alleen Fase 8 (13 juni 2026):
@@ -113,7 +113,7 @@ Opties: `off` (standaard) · `minimal` · `moderate` · `strict` — `minimal` i
 Schakeldatum: **9 mei 2026.** Alleen stap 7 moet op de afgesproken datum worden uitgevoerd.
 
 ::: step 07 "Radioinstelling wijzigen" "SF7 / CR5"
-Open in de Meshcore app de instellingen van je repeater en selecteer de **Netherlands** radio preset. Deze preset configureert alle parameters automatisch.
+Open in de Meshcore app de instellingen van je repeater en selecteer de **Netherlands** radio preset. Deze preset configureert alle radio-parameters automatisch — SF, coderingsnelheid, frequentie en bandbreedte.
 
 Alleen de spreidingsfactor en coderingsnelheid veranderen — de frequentie (869.618 MHz) is identiek aan de huidige SF8-instelling.
 
@@ -154,7 +154,7 @@ region save
     <li>Stap 1: Firmware bijgewerkt naar v1.15 of later — repeater en companion app</li>
     <li>Stap 2: Flood advert interval ≥ 50 uur; zero-hop advertenties 240 min</li>
     <li>Stap 3: Bots en auto-reply scripts gestopt; mc-radar.woodwar.com/mesh-health gecontroleerd</li>
-    <li>Stap 4: Regioscoping geconfigureerd (A.1 + A.2) op repeater en companion app</li>
+    <li>Stap 4: Regio's geconfigureerd op repeater en scope ingesteld via companion app</li>
     <li>Stap 5: Multi-byte pad — companion app Standaard Pad Hash Grootte = 2-byte; repeater CLI: <code>set path.hash.mode 1</code></li>
     <li>Stap 6: Lusdetectie — <code>set loop.detect minimal</code>; zendtijdfactor — <code>set dutycycle 10</code></li>
   </ul>
@@ -169,7 +169,7 @@ region save
   <p><strong>Fase 8 — Strikte regio-doorsturing (13 juni 2026):</strong></p>
   <ul class="switch-day-items">
     <li>Alle voorbereidingsstappen (1–6) voltooid</li>
-    <li>Stap 4 regioscoping (A.1 + A.2) bevestigd werkend — kanalen correct gescoord</li>
+    <li>Stap 4 regioscoping bevestigd werkend — kanalen correct gescoord</li>
     <li>Stap 8: Pas strikte regio-doorsturing toe op je repeater (<code>region denyf *</code>)</li>
   </ul>
 </div>
