@@ -5,3 +5,9 @@ _site/
 generate_switch_instructions.py
 prompts.txt
 CLAUDE.md
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
