@@ -64,7 +64,7 @@ Community tools make this easy:
 - [Dashboard configurator →](https://dashboard-elburg.f3dp.nl/#tab=region-configurator)
 
 ::: more "CLI sequence & full instructions"
-**Companion app:** In Experimental Settings, set **Default Region** to `nl`. Assign a scope to each channel you use — e.g. `nl-nh` for North Holland, `nl` for national, `eu` for Europe-wide.
+**Companion app:** In Experimental Settings, set **Default Region** to `nl`. Assign a scope to each channel you use — e.g. `nl-nh` for North Holland, `nl` for national, `eu` for Europe-wide. See the [public channel reference →](https://meshwiki.nl/wiki/Publieke_kanalen) for a full list with recommended scopes.
 
 Province codes: `nl-gr` · `nl-fr` · `nl-dr` · `nl-ov` · `nl-fl` · `nl-ge` · `nl-ut` · `nl-nh` · `nl-zh` · `nl-ze` · `nl-nb` · `nl-li`
 
@@ -74,6 +74,7 @@ Province codes: `nl-gr` · `nl-fr` · `nl-dr` · `nl-ov` · `nl-fl` · `nl-ge` �
 ```
 region put eu
 region put nl
+region put bx
 region put YOUR_PROVINCE
 region put YOUR_CITY
 region default YOUR_PROVINCE

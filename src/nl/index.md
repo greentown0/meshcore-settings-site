@@ -64,7 +64,7 @@ Community-tools maken dit eenvoudig:
 - [Dashboard configurator →](https://dashboard-elburg.f3dp.nl/#tab=region-configurator)
 
 ::: more "CLI-reeks & volledige instructies"
-**Companion app:** Stel in Experimentele Instellingen de **Standaard Regio** in op `nl`. Wijs een scope toe aan elk kanaal dat je gebruikt — bijv. `nl-nh` voor Noord-Holland, `nl` voor nationaal, `eu` voor Europa-breed.
+**Companion app:** Stel in Experimentele Instellingen de **Standaard Regio** in op `nl`. Wijs een scope toe aan elk kanaal dat je gebruikt — bijv. `nl-nh` voor Noord-Holland, `nl` voor nationaal, `eu` voor Europa-breed. Zie de [referentielijst publieke kanalen →](https://meshwiki.nl/wiki/Publieke_kanalen) voor een overzicht met aanbevolen scopes.
 
 Provinciecodes: `nl-gr` · `nl-fr` · `nl-dr` · `nl-ov` · `nl-fl` · `nl-ge` · `nl-ut` · `nl-nh` · `nl-zh` · `nl-ze` · `nl-nb` · `nl-li`
 
@@ -74,6 +74,7 @@ Provinciecodes: `nl-gr` · `nl-fr` · `nl-dr` · `nl-ov` · `nl-fl` · `nl-ge` �
 ```
 region put eu
 region put nl
+region put bx
 region put JOUW_PROVINCIE
 region put JOUW_STAD
 region default JOUW_PROVINCIE
