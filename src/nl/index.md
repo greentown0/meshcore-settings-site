@@ -88,7 +88,7 @@ region save
 ::: step 05 "Multi-byte pad" "2-byte hash"
 Schakel 2-byte pad-hashing in op je **companion app** (het belangrijkst) en je **repeater**. Dit verbetert de zichtbaarheid van pakketten in het netwerk.
 
-**Companion app:** Experimentele Instellingen → **Standaard Pad Hash Grootte = 2-byte**
+**Companion app:** Experimentele Instellingen → **Default Path Hash Size = 2-byte**
 
 ::: cli "Repeater CLI"
 ```
