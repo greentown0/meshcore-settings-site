@@ -4,6 +4,13 @@ title: Dutch Meshcore — SF7 Settings
 description: "Community-wide switch · 9 May 2026"
 ---
 
+## Why are we switching?
+
+The Dutch Meshcore mesh is heavily congested and increasingly unreliable. Community testing in March 2026 confirmed that switching to SF7 significantly increases network capacity and improves reliability for everyone.
+
+- [Test preparation (PDF) ↗](https://assets.woodwar.com/meshcore_sf_test_plan.pdf) — the test plan, procedure, and settings used during the March 2026 weekend test
+- [Test report (PDF) ↗](https://assets.woodwar.com/meshcore_sf_test_report.pdf) — full analysis of the results, including data, findings, and the recommendation to switch to SF7
+
 ## Settings at a glance
 
 ::: settings
@@ -146,6 +153,7 @@ region denyf *
 region save
 ```
 :::
+Strict forwarding only blocks packets that carry **no region tag at all** (and would otherwise be repeated across the whole of the EU, increasing congestion). It does not prevent communication with neighbouring provinces, with the whole country, or with the countries in the EU. It does however require better understanding of the technology.
 
 ## Checklist
 

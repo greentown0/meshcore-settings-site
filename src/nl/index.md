@@ -4,6 +4,13 @@ title: Dutch Meshcore — SF7 Instellingen
 description: "Gemeenschappelijke omschakeling · 9 mei 2026"
 ---
 
+## Waarom schakelen we?
+
+Het Dutch Meshcore-mesh is zwaar overbelast en steeds onbetrouwbaarder. Community-tests in maart 2026 bevestigden dat overstappen naar SF7 de netwerkcapaciteit aanzienlijk vergroot en de betrouwbaarheid voor iedereen verbetert.
+
+- [Testvoorbereiding (PDF) ↗](https://assets.woodwar.com/meshcore_sf_test_plan.pdf) — het testplan, de procedure en instellingen van het maart 2026 testweekend
+- [Testrapport (PDF) ↗](https://assets.woodwar.com/meshcore_sf_test_report.pdf) — volledige analyse van de resultaten, inclusief data, bevindingen en de aanbeveling om over te stappen naar SF7
+
 ## Instellingen in één oogopslag
 
 ::: settings
@@ -146,6 +153,7 @@ region denyf *
 region save
 ```
 :::
+Strikte doorsturing blokkeert alleen pakketten die **helemaal geen regiotag** bevatten (en anders door heel Europa herhaald zouden worden, wat de congestie vergroot). Het voorkomt geen communicatie met naburige provincies, met heel Nederland of met de landen in de EU. Het vereist echter wel een beter begrip van de technologie.
 
 ## Checklist
 
