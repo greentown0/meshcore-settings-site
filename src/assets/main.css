@@ -141,6 +141,61 @@ button { font-family: inherit; cursor: pointer; }
   letter-spacing: 0.02em;
 }
 
+/* ── Countdown ────────────────────────────────────────────────────────────── */
+.countdown {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+}
+.countdown__heading {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--c-muted);
+}
+.countdown__units {
+  display: flex;
+  gap: 0.5rem;
+}
+.countdown__unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 3.75rem;
+  padding: 0.5rem 0.5rem 0.4rem;
+  background: var(--c-fill);
+  border: 1px solid var(--c-rule);
+  border-radius: 6px;
+}
+.countdown__num {
+  font-family: var(--f-display);
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--c-red);
+  font-variant-numeric: tabular-nums;
+}
+.countdown__lbl {
+  font-size: 0.6rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--c-muted);
+  margin-top: 0.2rem;
+}
+.countdown__done {
+  font-family: var(--f-display);
+  font-size: 1.6rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--c-red);
+  margin-top: 1rem;
+}
+
 /* ── Section labels (H2) ─────────────────────────────────────────────────── */
 h2 {
   font-family: var(--f-display);

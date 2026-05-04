@@ -43,6 +43,61 @@
     });
   });
 
+  // ── Countdown to switch day (9 May 2026) ─────────────────────────────────
+  var cdEl = document.getElementById("countdown");
+  if (cdEl) {
+    var switchDate = new Date("2026-05-09T00:00:00+02:00");
+
+    var headingEl = document.createElement("p");
+    headingEl.className = "countdown__heading";
+    headingEl.textContent = isNl ? "Aftellen naar schakeldag" : "Counting down to switch day";
+
+    var unitsEl = document.createElement("div");
+    unitsEl.className = "countdown__units";
+
+    [
+      { id: "cd-d", label: isNl ? "dagen" : "days" },
+      { id: "cd-h", label: isNl ? "uren" : "hours" },
+      { id: "cd-m", label: "min" },
+      { id: "cd-s", label: "sec" },
+    ].forEach(function (u) {
+      var unit = document.createElement("div");
+      unit.className = "countdown__unit";
+      unit.innerHTML =
+        '<span class="countdown__num" id="' + u.id + '">--</span>' +
+        '<span class="countdown__lbl">' + u.label + "</span>";
+      unitsEl.appendChild(unit);
+    });
+
+    cdEl.appendChild(headingEl);
+    cdEl.appendChild(unitsEl);
+    cdEl.removeAttribute("hidden");
+
+    function pad(n) { return n < 10 ? "0" + n : String(n); }
+
+    function tick() {
+      var diff = switchDate.getTime() - Date.now();
+      if (diff <= 0) {
+        cdEl.innerHTML =
+          '<p class="countdown__done">' +
+          (isNl ? "Schakeldag is aangebroken!" : "Switch day is here!") +
+          "</p>";
+        return;
+      }
+      var s = Math.floor(diff / 1000);
+      var m = Math.floor(s / 60); s %= 60;
+      var h = Math.floor(m / 60); m %= 60;
+      var d = Math.floor(h / 24); h %= 24;
+      document.getElementById("cd-d").textContent = d;
+      document.getElementById("cd-h").textContent = pad(h);
+      document.getElementById("cd-m").textContent = pad(m);
+      document.getElementById("cd-s").textContent = pad(s);
+    }
+
+    tick();
+    setInterval(tick, 1000);
+  }
+
   var supportsPopover = "popover" in HTMLElement.prototype;
 
   // ── Popover polyfill for browsers without native support ─────────────────
