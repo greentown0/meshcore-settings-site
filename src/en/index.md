@@ -118,7 +118,11 @@ Options: `off` (default) · `minimal` · `moderate` · `strict` — `minimal` is
 
 ## Switch day
 
-Switch date: **9 May 2026.** Only step 7 needs to happen on the agreed date.
+Switch time: **9 May 2026 at 13:00** — the community target. Switching a little earlier that day or later is fine if 13:00 doesn't suit you. Give your neighbours a chance to switch around the same time, and allow the following week for fine-tuning settings and discussing any local adjustments.
+
+Not everyone will be on the new settings at exactly the same moment, so your local mesh may take a little while to come together after the switch. Be patient — it will settle.
+
+Only step 7 needs to happen on switch day.
 
 ::: step 07 "Switch radio settings" "SF7 / CR5"
 In the Meshcore app, open your repeater settings and select the **Netherlands** radio preset. This preset automatically configures all radio parameters — SF, coding rate, frequency, and bandwidth.
@@ -167,7 +171,7 @@ Strict forwarding only blocks packets that carry **no region tag at all** (and w
     <li>Step 5: Multi-byte path — companion app Default Path Hash Size = 2-byte; repeater CLI: <code>set path.hash.mode 1</code></li>
     <li>Step 6: Loop detection — <code>set loop.detect minimal</code>; airtime factor — <code>set dutycycle 10</code></li>
   </ul>
-  <p><strong>Switch day (9 May 2026):</strong></p>
+  <p><strong>Switch day (9 May 2026, 13:00):</strong></p>
   <ul class="switch-day-items">
     <li>Step 7: Apply the Netherlands radio preset (SF7 / CR5, 869.618 MHz, 62.5 kHz)</li>
     <li>Confirm you can hear your neighbours on the new settings</li>

@@ -46,7 +46,7 @@
   // ── Countdown to switch day (9 May 2026) ─────────────────────────────────
   var cdEl = document.getElementById("countdown");
   if (cdEl) {
-    var switchDate = new Date("2026-05-09T00:00:00+02:00");
+    var switchDate = new Date("2026-05-09T13:00:00+02:00");
 
     var headingEl = document.createElement("p");
     headingEl.className = "countdown__heading";

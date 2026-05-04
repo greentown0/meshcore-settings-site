@@ -118,7 +118,11 @@ Opties: `off` (standaard) · `minimal` · `moderate` · `strict` — `minimal` i
 
 ## Schakeldag
 
-Schakeldatum: **9 mei 2026.** Alleen stap 7 moet op de afgesproken datum worden uitgevoerd.
+Schakeltijd: **9 mei 2026 om 13:00** — het gemeenschappelijke streeftijdstip. Een beetje eerder of later die dag is prima als 13:00 niet uitkomt. Geef je buren de kans om ook rond die tijd over te stappen, en gebruik de week erna om instellingen bij te stellen en eventuele lokale aanpassingen te bespreken.
+
+Niet iedereen schakelt op hetzelfde moment, dus het kan even duren voordat je lokale mesh volledig op de nieuwe instellingen draait. Heb geduld — het komt goed.
+
+Alleen stap 7 hoeft op de schakeldag te worden uitgevoerd.
 
 ::: step 07 "Radioinstelling wijzigen" "SF7 / CR5"
 Open in de Meshcore app de instellingen van je repeater en selecteer de **Netherlands** radio preset. Deze preset configureert alle radio-parameters automatisch — SF, coderingsnelheid, frequentie en bandbreedte.
@@ -167,7 +171,7 @@ Strikte doorsturing blokkeert alleen pakketten die **helemaal geen regiotag** be
     <li>Stap 5: Multi-byte pad — companion app Standaard Pad Hash Grootte = 2-byte; repeater CLI: <code>set path.hash.mode 1</code></li>
     <li>Stap 6: Lusdetectie — <code>set loop.detect minimal</code>; zendtijdfactor — <code>set dutycycle 10</code></li>
   </ul>
-  <p><strong>Schakeldag (9 mei 2026):</strong></p>
+  <p><strong>Schakeldag (9 mei 2026, 13:00):</strong></p>
   <ul class="switch-day-items">
     <li>Stap 7: Pas de Netherlands radio preset toe (SF7 / CR5, 869.618 MHz, 62.5 kHz)</li>
     <li>Bevestig dat je je buren kunt horen op de nieuwe instellingen</li>
