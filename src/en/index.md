@@ -1,7 +1,7 @@
 ---
 layout: base.njk
 title: Dutch Meshcore — SF7 Settings
-description: "Community-wide switch · 9 May 2026"
+description: "Community-wide switch · 9 May 2026 13:00"
 ---
 
 ## Why are we switching?

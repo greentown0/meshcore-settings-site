@@ -1,7 +1,7 @@
 ---
 layout: base.njk
 title: Dutch Meshcore — SF7 Instellingen
-description: "Gemeenschappelijke omschakeling · 9 mei 2026"
+description: "Gemeenschappelijke omschakeling · 9 mei 2026 13:00"
 ---
 
 ## Waarom schakelen we?
