@@ -16,7 +16,7 @@ The Dutch Meshcore mesh is heavily congested and increasingly unreliable. Commun
 ::: settings
 | Parameter | Value |
 | :--- | :--- |
-| Radio preset | Netherlands |
+| Radio preset | Custom |
 | SF / CR | SF7 / CR5 |
 | Frequency | 869.618 MHz |
 | Bandwidth | 62.5 kHz |
@@ -125,7 +125,7 @@ Not everyone will be on the new settings at exactly the same moment, so your loc
 Only step 7 needs to happen on switch day.
 
 ::: step 07 "Switch radio settings" "SF7 / CR5"
-In the Meshcore app, open your repeater settings and select the **Netherlands** radio preset. This preset automatically configures all radio parameters — SF, coding rate, frequency, and bandwidth.
+In the Meshcore app, open your repeater settings and set the radio preset to **Custom**. Enter the following parameters manually:
 
 Only the spreading factor and coding rate change — the frequency (869.618 MHz) is identical to the current SF8 setting.
 
@@ -133,7 +133,7 @@ After applying the preset, confirm you can hear your neighbours on the new setti
 
 ::: cli "New radio settings"
 ```
-Preset:     Netherlands
+Preset:     Custom
 SF / CR:    SF7 / CR5
 Frequency:  869.618 MHz
 Bandwidth:  62.5 kHz
@@ -173,7 +173,7 @@ Strict forwarding only blocks packets that carry **no region tag at all** (and w
   </ul>
   <p><strong>Switch day (9 May 2026, 13:00):</strong></p>
   <ul class="switch-day-items">
-    <li>Step 7: Apply the Netherlands radio preset (SF7 / CR5, 869.618 MHz, 62.5 kHz)</li>
+    <li>Step 7: Switch radio settings — set preset to Custom, enter SF7 / CR5, 869.618 MHz, 62.5 kHz</li>
     <li>Confirm you can hear your neighbours on the new settings</li>
   </ul>
 </div>

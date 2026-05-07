@@ -16,7 +16,7 @@ Het Dutch Meshcore-mesh is zwaar overbelast en steeds onbetrouwbaarder. Communit
 ::: settings
 | Parameter | Waarde |
 | :--- | :--- |
-| Radio preset | Netherlands |
+| Radio preset | Custom |
 | SF / CR | SF7 / CR5 |
 | Frequentie | 869.618 MHz |
 | Bandbreedte | 62.5 kHz |
@@ -125,7 +125,7 @@ Niet iedereen schakelt op hetzelfde moment, dus het kan even duren voordat je lo
 Alleen stap 7 hoeft op de schakeldag te worden uitgevoerd.
 
 ::: step 07 "Radioinstelling wijzigen" "SF7 / CR5"
-Open in de Meshcore app de instellingen van je repeater en selecteer de **Netherlands** radio preset. Deze preset configureert alle radio-parameters automatisch — SF, coderingsnelheid, frequentie en bandbreedte.
+Open in de Meshcore app de instellingen van je repeater en stel het radio preset in op **Custom**. Voer de volgende parameters handmatig in:
 
 Alleen de spreidingsfactor en coderingsnelheid veranderen — de frequentie (869.618 MHz) is identiek aan de huidige SF8-instelling.
 
@@ -133,7 +133,7 @@ Bevestig na het toepassen van de preset dat je je buren kunt horen op de nieuwe 
 
 ::: cli "Nieuwe radio-instellingen"
 ```
-Preset:      Netherlands
+Preset:      Custom
 SF / CR:     SF7 / CR5
 Frequentie:  869.618 MHz
 Bandbreedte: 62.5 kHz
@@ -173,7 +173,7 @@ Strikte doorsturing blokkeert alleen pakketten die **helemaal geen regiotag** be
   </ul>
   <p><strong>Schakeldag (9 mei 2026, 13:00):</strong></p>
   <ul class="switch-day-items">
-    <li>Stap 7: Pas de Netherlands radio preset toe (SF7 / CR5, 869.618 MHz, 62.5 kHz)</li>
+    <li>Stap 7: Radioinstelling wijzigen — stel preset in op Custom en voer SF7 / CR5, 869.618 MHz, 62.5 kHz in</li>
     <li>Bevestig dat je je buren kunt horen op de nieuwe instellingen</li>
   </ul>
 </div>
