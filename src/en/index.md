@@ -105,8 +105,14 @@ set path.hash.mode 1
 :::
 
 ::: step 06 "Loop detection" "set dutycycle 10"
-Enable loop detection and enforce airtime limits. Run in the repeater CLI:
-`set loop.detect minimal` and `set dutycycle 10`.
+Enable loop detection and enforce airtime limits. Run both commands in the repeater CLI:
+
+::: cli "Repeater CLI"
+```
+set loop.detect minimal
+set dutycycle 10
+```
+:::
 
 ::: more "What do these commands do?"
 **`set loop.detect minimal`** — Rejects flood packets that appear to be looping across the mesh. A faulty node can cause a packet to circulate up to the 64-hop limit, consuming significant airtime. The `minimal` setting catches clear loops without false positives.
@@ -159,33 +165,27 @@ region save
 :::
 Strict forwarding only blocks packets that carry **no region tag at all** (and would otherwise be repeated across the whole of the EU, increasing congestion). It does not prevent communication with neighbouring provinces, with the whole country, or with the countries in the EU. It does however require better understanding of the technology.
 
-## Checklist
+## Troubleshooting
 
-<div class="checklist-wrap checklist-wrap--green">
-  <p><strong>Before switch day — confirm you have completed the preparation steps:</strong></p>
-  <ul>
-    <li>Step 1: Firmware updated to v1.15 or later — repeater and companion app</li>
-    <li>Step 2: Flood advert interval ≥ 50 h; zero-hop adverts 240 min</li>
-    <li>Step 3: Bots and auto-reply scripts stopped; mc-radar.woodwar.com/mesh-health checked</li>
-    <li>Step 4: Regions configured on repeater and scope set in companion app</li>
-    <li>Step 5: Multi-byte path — companion app Default Path Hash Size = 2-byte; repeater CLI: <code>set path.hash.mode 1</code></li>
-    <li>Step 6: Loop detection — <code>set loop.detect minimal</code>; airtime factor — <code>set dutycycle 10</code></li>
-  </ul>
-  <p><strong>Switch day (9 May 2026, 13:00):</strong></p>
-  <ul class="switch-day-items">
-    <li>Step 7: Switch radio settings — set preset to Custom, enter SF7 / CR5, 869.618 MHz, 62.5 kHz</li>
-    <li>Confirm you can hear your neighbours on the new settings</li>
-  </ul>
-</div>
+If you experience trouble after the switch, the settings below are the most common sources of issues.
 
-<div class="checklist-wrap checklist-wrap--purple">
-  <p><strong>Phase 8 — Strict region forwarding (13 June 2026):</strong></p>
-  <ul class="switch-day-items">
-    <li>All preparation steps (1–6) completed</li>
-    <li>Step 4 region scoping confirmed working — channels scoped correctly</li>
-    <li>Step 8: Apply strict region forwarding on your repeater (<code>region denyf *</code>)</li>
-  </ul>
-</div>
+**Multibyte path (step 5)**
+
+For multi-byte path to work, your companion app must be set correctly in Experimental Settings, and all repeaters along your path must be running firmware v1.14 or later. A repeater that switched but did not update its firmware will not forward your multi-byte path messages.
+
+To troubleshoot, disable multi-byte path: in your companion app, set **Experimental Settings → Default Path Hash Size = 1-byte**.
+
+The same setting on your repeater affects the adverts it sends. If your repeater sends adverts with a 2-byte path but nearby repeaters are not yet updated, those adverts will not be forwarded. To revert the repeater setting:
+
+::: cli "Repeater CLI"
+```
+set path.hash.mode 0
+```
+:::
+
+**Regions (step 4)**
+
+If regions are not configured correctly on your neighbours' repeaters, the scoped messages you send from your companion will not be understood and will be dropped. To troubleshoot, disable the scope on the channel where you are sending messages — if the problem goes away, it points to a region misconfiguration in your local mesh.
 
 ## Resources
 

@@ -105,8 +105,14 @@ set path.hash.mode 1
 :::
 
 ::: step 06 "Lusdetectie" "set dutycycle 10"
-Schakel lusdetectie in en handhaaf de zendtijdlimieten. Voer uit in de repeater CLI:
-`set loop.detect minimal` en `set dutycycle 10`.
+Schakel lusdetectie in en handhaaf de zendtijdlimieten. Voer beide opdrachten uit in de repeater CLI:
+
+::: cli "Repeater CLI"
+```
+set loop.detect minimal
+set dutycycle 10
+```
+:::
 
 ::: more "Wat doen deze opdrachten?"
 **`set loop.detect minimal`** — Weigert flood-pakketten die lijken te lussen door het mesh. Een defecte node kan een pakket laten circuleren tot de 64-hop limiet, waarbij aanzienlijke zendtijd wordt verbruikt. De instelling `minimal` detecteert duidelijke lussen zonder valse positieven.
@@ -159,33 +165,27 @@ region save
 :::
 Strikte doorsturing blokkeert alleen pakketten die **helemaal geen regiotag** bevatten (en anders door heel Europa herhaald zouden worden, wat de congestie vergroot). Het voorkomt geen communicatie met naburige provincies, met heel Nederland of met de landen in de EU. Het vereist echter wel een beter begrip van de technologie.
 
-## Checklist
+## Probleemoplossing
 
-<div class="checklist-wrap checklist-wrap--green">
-  <p><strong>Vóór de schakeldag — bevestig dat je de voorbereidingsstappen hebt voltooid:</strong></p>
-  <ul>
-    <li>Stap 1: Firmware bijgewerkt naar v1.15 of later — repeater en companion app</li>
-    <li>Stap 2: Flood advert interval ≥ 50 uur; zero-hop advertenties 240 min</li>
-    <li>Stap 3: Bots en auto-reply scripts gestopt; mc-radar.woodwar.com/mesh-health gecontroleerd</li>
-    <li>Stap 4: Regio's geconfigureerd op repeater en scope ingesteld via companion app</li>
-    <li>Stap 5: Multi-byte pad — companion app Standaard Pad Hash Grootte = 2-byte; repeater CLI: <code>set path.hash.mode 1</code></li>
-    <li>Stap 6: Lusdetectie — <code>set loop.detect minimal</code>; zendtijdfactor — <code>set dutycycle 10</code></li>
-  </ul>
-  <p><strong>Schakeldag (9 mei 2026, 13:00):</strong></p>
-  <ul class="switch-day-items">
-    <li>Stap 7: Radioinstelling wijzigen — stel preset in op Custom en voer SF7 / CR5, 869.618 MHz, 62.5 kHz in</li>
-    <li>Bevestig dat je je buren kunt horen op de nieuwe instellingen</li>
-  </ul>
-</div>
+Als je na de omschakeling problemen ervaart, zijn de onderstaande instellingen de meest voorkomende oorzaken.
 
-<div class="checklist-wrap checklist-wrap--purple">
-  <p><strong>Fase 8 — Strikte regio-doorsturing (13 juni 2026):</strong></p>
-  <ul class="switch-day-items">
-    <li>Alle voorbereidingsstappen (1–6) voltooid</li>
-    <li>Stap 4 regioscoping bevestigd werkend — kanalen correct gescoord</li>
-    <li>Stap 8: Pas strikte regio-doorsturing toe op je repeater (<code>region denyf *</code>)</li>
-  </ul>
-</div>
+**Multibyte pad (stap 5)**
+
+Voor een correct werkend multi-byte pad moet je companion app correct ingesteld zijn in Experimentele Instellingen, en moeten alle repeaters langs je pad firmware v1.14 of later draaien. Een repeater die is omgeschakeld maar de firmware niet heeft bijgewerkt, stuurt je multi-byte pad-berichten niet door.
+
+Om dit op te lossen, schakel je multi-byte pad uit: stel in je companion app **Experimentele Instellingen → Standaard Pad Hash Grootte = 1-byte** in.
+
+Dezelfde instelling op je repeater beïnvloedt de advertenties die hij verstuurt. Als je repeater advertenties verstuurt met een 2-byte pad, maar nabijgelegen repeaters zijn nog niet bijgewerkt, worden die advertenties niet doorgestuurd. Om de instelling van de repeater terug te zetten:
+
+::: cli "Repeater CLI"
+```
+set path.hash.mode 0
+```
+:::
+
+**Regio's (stap 4)**
+
+Als regio's niet correct zijn geconfigureerd bij je buurrepeaters, worden de gescopede berichten die je vanuit je companion app verstuurt niet begrepen en worden ze verwijderd. Om dit op te lossen, schakel je de scope uit op het kanaal waarop je berichten verstuurt. Als het probleem dan verdwijnt, is er sprake van een regioconfiguratiefout in je lokale mesh.
 
 ## Bronnen
 
