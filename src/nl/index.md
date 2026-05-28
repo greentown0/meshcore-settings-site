@@ -1,12 +1,12 @@
 ---
 layout: base.njk
-title: Dutch Meshcore — SF7 Instellingen
-description: "Gemeenschappelijke omschakeling · 9 mei 2026 13:00"
+title: Dutch Meshcore — Instellingen
+description: "SF7-instellingen voor het Dutch Meshcore-mesh"
 ---
 
-## Waarom schakelen we?
+## Waarom zijn we overgeschakeld?
 
-Het Dutch Meshcore-mesh is zwaar overbelast en steeds onbetrouwbaarder. Community-tests in maart 2026 bevestigden dat overstappen naar SF7 de netwerkcapaciteit aanzienlijk vergroot en de betrouwbaarheid voor iedereen verbetert.
+Het Dutch Meshcore-mesh was zwaar overbelast en steeds onbetrouwbaarder. Community-tests in maart 2026 bevestigden dat overstappen naar SF7 de netwerkcapaciteit aanzienlijk vergroot en de betrouwbaarheid voor iedereen verbetert.
 
 - [Testvoorbereiding (PDF) ↗](https://assets.woodwar.com/meshcore_sf_test_plan.pdf) — het testplan, de procedure en instellingen van het maart 2026 testweekend
 - [Testrapport (PDF) ↗](https://assets.woodwar.com/meshcore_sf_test_report.pdf) — volledige analyse van de resultaten, inclusief data, bevindingen en de aanbeveling om over te stappen naar SF7
@@ -26,7 +26,7 @@ Het Dutch Meshcore-mesh is zwaar overbelast en steeds onbetrouwbaarder. Communit
 
 ## Voorbereidingsstappen
 
-Stappen 1–6 kunnen **voor de schakeldag** worden uitgevoerd, op je eigen tempo.
+Voer alle stappen uit. Sla er geen over.
 
 De onderstaande stappen zijn een verkorte versie van de [volledige schakelinstructies (PDF) ↗](https://assets.woodwar.com/meshcore_sf7_switch_instructions.pdf).
 
@@ -47,7 +47,7 @@ Updates bevatten ook verbeteringen voor congestiebeheer.
 Stel je **flood advert interval in op 50 uur** of meer. Zero-hop advertenties moeten **240 minuten** (4 uur) zijn.
 
 ::: more "Flood vs zero-hop advertenties"
-Bezoek [mc-radar.woodwar.com/mesh-health](https://mc-radar.woodwar.com/mesh-health) om te controleren of je node vermeld staat. Nodes die daar voorkomen hebben een te kort advert interval en veroorzaken onnodige belasting op het mesh. Als jouw node verschijnt, herstel dit dan vóór de omschakeling.
+Bezoek [mc-radar.woodwar.com/mesh-health](https://mc-radar.woodwar.com/mesh-health) om te controleren of je node vermeld staat. Nodes die daar voorkomen hebben een te kort advert interval en veroorzaken onnodige belasting op het mesh. Als jouw node verschijnt, herstel dit dan.
 
 **Flood advertenties** reizen door het gehele mesh en kondigen je repeater aan bij het volledige netwerk. Ze te vaak sturen is een hoofdoorzaak van congestie. Stel in op minimaal **50 uur** — hoger is prima.
 
@@ -75,7 +75,7 @@ Community-tools maken dit eenvoudig:
 
 Provinciecodes: `nl-gr` · `nl-fr` · `nl-dr` · `nl-ov` · `nl-fl` · `nl-ge` · `nl-ut` · `nl-nh` · `nl-zh` · `nl-ze` · `nl-nb` · `nl-li`
 
-**⚠ `region denyf *` is Fase 8 — 13 juni 2026.** Voer dit niet uit op de schakeldag. Dit te vroeg inschakelen zorgt ervoor dat je repeater berichten van nodes zonder regioscoping weigert.
+**⚠ `region denyf *` is Fase 8 — 13 juni 2026.** Voer dit nog niet uit. Dit te vroeg inschakelen zorgt ervoor dat je repeater berichten van nodes zonder regioscoping weigert.
 
 ::: cli "Repeater CLI"
 ```
@@ -107,12 +107,10 @@ set path.hash.mode 1
 ::: step 06 "Lusdetectie" "set dutycycle 10"
 Schakel lusdetectie in en handhaaf de zendtijdlimieten. Voer beide opdrachten uit in de repeater CLI:
 
-::: cli "Repeater CLI"
 ```
 set loop.detect minimal
 set dutycycle 10
 ```
-:::
 
 ::: more "Wat doen deze opdrachten?"
 **`set loop.detect minimal`** — Weigert flood-pakketten die lijken te lussen door het mesh. Een defecte node kan een pakket laten circuleren tot de 64-hop limiet, waarbij aanzienlijke zendtijd wordt verbruikt. De instelling `minimal` detecteert duidelijke lussen zonder valse positieven.
@@ -121,14 +119,6 @@ Opties: `off` (standaard) · `minimal` · `moderate` · `strict` — `minimal` i
 
 **`set dutycycle 10`** — Handhaaft 10% dutycycle. Dit is een **wettelijke vereiste** voor gebruik in Europa op het 868 MHz sub-band dat door Meshcore wordt gebruikt.
 :::
-
-## Schakeldag
-
-Schakeltijd: **9 mei 2026 om 13:00** — het gemeenschappelijke streeftijdstip. Een beetje eerder of later die dag is prima als 13:00 niet uitkomt. Geef je buren de kans om ook rond die tijd over te stappen, en gebruik de week erna om instellingen bij te stellen en eventuele lokale aanpassingen te bespreken.
-
-Niet iedereen schakelt op hetzelfde moment, dus het kan even duren voordat je lokale mesh volledig op de nieuwe instellingen draait. Heb geduld — het komt goed.
-
-Alleen stap 7 hoeft op de schakeldag te worden uitgevoerd.
 
 ::: step 07 "Radioinstelling wijzigen" "SF7 / CR5"
 Open in de Meshcore app de instellingen van je repeater en stel het radio preset in op **Custom**. Voer de volgende parameters handmatig in:
@@ -145,7 +135,7 @@ Frequentie:  869.618 MHz
 Bandbreedte: 62.5 kHz
 ```
 :::
-In gevallen van zwakke verbindingen na het toepassen van de nieuwe instellingen kan het handmatig wijzigen van de coderingsnelheid van CR5 naar CR8 de stabiliteit verbeteren ten koste van hoger zendtijdgebruik. Deze verbetering wordt toegepast op de transmissie van de geconfigureerde node door extra foutcorrectie-informatie toe te voegen en zal de ontvangst niet verbeteren. De verbetering zal marginaal zijn; een beter geplaatste of betere kwaliteitsantenne heeft een merkbaarder effect.
+
 ## Fase 8 — Strikte regio-doorsturing
 
 Ongeveer een maand na de hoofdomschakeling schakelt de community strikte regio-doorsturing in. Dit verandert het mesh in verbonden regionale zones — problemen of congestie in één gebied cascaderen niet meer door het hele netwerk, en advertenties zijn beperkt tot hun regio.
@@ -167,7 +157,11 @@ Strikte doorsturing blokkeert alleen pakketten die **helemaal geen regiotag** be
 
 ## Probleemoplossing
 
-Als je na de omschakeling problemen ervaart, zijn de onderstaande instellingen de meest voorkomende oorzaken.
+Als je problemen ervaart met de nieuwe instellingen, zijn de onderstaande instellingen de meest voorkomende oorzaken.
+
+**Zwakke verbindingen (stap 7)**
+
+Bij zwakke verbindingen na het toepassen van SF7 kan het wijzigen van de coderingsnelheid van CR5 naar CR8 de stabiliteit verbeteren ten koste van hoger zendtijdgebruik. Dit heeft alleen effect op uitgaande transmissies — het voegt extra foutcorrectie toe maar verbetert de ontvangst niet. Het effect is marginaal; een beter geplaatste of betere kwaliteitsantenne heeft een merkbaarder effect.
 
 **Multibyte pad (stap 5)**
 

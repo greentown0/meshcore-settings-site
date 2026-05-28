@@ -1,12 +1,12 @@
 ---
 layout: base.njk
-title: Dutch Meshcore — SF7 Settings
-description: "Community-wide switch · 9 May 2026 13:00"
+title: Dutch Meshcore — Settings
+description: "SF7 settings for the Dutch Meshcore mesh"
 ---
 
-## Why are we switching?
+## Why we switched
 
-The Dutch Meshcore mesh is heavily congested and increasingly unreliable. Community testing in March 2026 confirmed that switching to SF7 significantly increases network capacity and improves reliability for everyone.
+The Dutch Meshcore mesh was heavily congested and increasingly unreliable. Community testing in March 2026 confirmed that switching to SF7 significantly increases network capacity and improves reliability for everyone.
 
 - [Test preparation (PDF) ↗](https://assets.woodwar.com/meshcore_sf_test_plan.pdf) — the test plan, procedure, and settings used during the March 2026 weekend test
 - [Test report (PDF) ↗](https://assets.woodwar.com/meshcore_sf_test_report.pdf) — full analysis of the results, including data, findings, and the recommendation to switch to SF7
@@ -26,7 +26,7 @@ The Dutch Meshcore mesh is heavily congested and increasingly unreliable. Commun
 
 ## Preparation steps
 
-Steps 1–6 can be completed **before switch day**, at your own pace.
+Complete all steps. Do not skip any.
 
 The steps below are a compressed version of the [full switch instructions (PDF) ↗](https://assets.woodwar.com/meshcore_sf7_switch_instructions.pdf).
 
@@ -47,7 +47,7 @@ Updates also include improvements to congestion handling.
 Set your **flood advert interval to 50 hours** or more. Zero-hop adverts should be **240 minutes** (4 hours).
 
 ::: more "Flood vs zero-hop adverts"
-Visit [mc-radar.woodwar.com/mesh-health](https://mc-radar.woodwar.com/mesh-health) to check whether your node is listed. Nodes there have an advert interval that is too short and are causing unnecessary load on the mesh. If yours appears, fix it before the switch.
+Visit [mc-radar.woodwar.com/mesh-health](https://mc-radar.woodwar.com/mesh-health) to check whether your node is listed. Nodes there have an advert interval that is too short and are causing unnecessary load on the mesh. If yours appears, fix it.
 
 **Flood adverts** travel across the entire mesh and announce your repeater to the full network. Sending them too often is a leading cause of congestion. Set to at least **50 hours** — higher is fine.
 
@@ -75,7 +75,7 @@ Community tools make this easy:
 
 Province codes: `nl-gr` · `nl-fr` · `nl-dr` · `nl-ov` · `nl-fl` · `nl-ge` · `nl-ut` · `nl-nh` · `nl-zh` · `nl-ze` · `nl-nb` · `nl-li`
 
-**⚠ `region denyf *` is Phase 8 — 13 June 2026.** Do not run it on switch day. Enabling it before then will cause your repeater to drop messages from nodes that have not yet configured region scoping.
+**⚠ `region denyf *` is Phase 8 — 13 June 2026.** Do not run it yet. Enabling it before then will cause your repeater to drop messages from nodes that have not yet configured region scoping.
 
 ::: cli "Repeater CLI"
 ```
@@ -107,12 +107,10 @@ set path.hash.mode 1
 ::: step 06 "Loop detection" "set dutycycle 10"
 Enable loop detection and enforce airtime limits. Run both commands in the repeater CLI:
 
-::: cli "Repeater CLI"
 ```
 set loop.detect minimal
 set dutycycle 10
 ```
-:::
 
 ::: more "What do these commands do?"
 **`set loop.detect minimal`** — Rejects flood packets that appear to be looping across the mesh. A faulty node can cause a packet to circulate up to the 64-hop limit, consuming significant airtime. The `minimal` setting catches clear loops without false positives.
@@ -121,14 +119,6 @@ Options: `off` (default) · `minimal` · `moderate` · `strict` — `minimal` is
 
 **`set dutycycle 10`** — Enforces 10% duty cycle. This is a **legal requirement** for operation in Europe on the 868 MHz sub-band used by Meshcore.
 :::
-
-## Switch day
-
-Switch time: **9 May 2026 at 13:00** — the community target. Switching a little earlier that day or later is fine if 13:00 doesn't suit you. Give your neighbours a chance to switch around the same time, and allow the following week for fine-tuning settings and discussing any local adjustments.
-
-Not everyone will be on the new settings at exactly the same moment, so your local mesh may take a little while to come together after the switch. Be patient — it will settle.
-
-Only step 7 needs to happen on switch day.
 
 ::: step 07 "Switch radio settings" "SF7 / CR5"
 In the Meshcore app, open your repeater settings and set the radio preset to **Custom**. Enter the following parameters manually:
@@ -145,7 +135,7 @@ Frequency:  869.618 MHz
 Bandwidth:  62.5 kHz
 ```
 :::
-In cases of weak connections after the new settings are applied, changing the coding rate manually from CR5 to CR8 can improve stability at the expense of higher airtime usage. This improvement is applied to the transmission of the configured node, by adding extra error correction information and it will not improve reception. The improvement will be marginal, and a better placed or better quality antenna would produce a more noticeable effect.
+
 ## Phase 8 — Strict region forwarding
 
 Approximately one month after the main switch, the community will enable strict region forwarding. This turns the mesh into connected regional zones — problems or congestion in one area no longer cascade across the whole network, and adverts are scoped to their region.
@@ -167,7 +157,11 @@ Strict forwarding only blocks packets that carry **no region tag at all** (and w
 
 ## Troubleshooting
 
-If you experience trouble after the switch, the settings below are the most common sources of issues.
+If you are experiencing trouble with the new settings, the issues below are the most common causes.
+
+**Weak connections (step 7)**
+
+If connections are weak after applying SF7, changing the coding rate from CR5 to CR8 can improve stability at the expense of higher airtime usage. This affects only outgoing transmissions — it adds extra error correction but does not improve reception. The effect is marginal; a better-placed or better-quality antenna produces a more noticeable improvement.
 
 **Multibyte path (step 5)**
 
