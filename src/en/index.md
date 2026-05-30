@@ -34,6 +34,8 @@ The steps below are a compressed version of the [full switch instructions (PDF) 
 ::: step 01 "Firmware" "v1.15+"
 Update **both** your repeater and companion firmware to **v1.15+** and make sure you are using the latest version of the mobile app.
 
+If you have a repeater, make sure its 2-byte ID does not conflict with an existing repeater. Use the [prefix tool](https://cornmeister.nl/#/analytics?tab=prefix-tool) to check for available prefixes without conflict. If you are already using a prefix that another node chose first, please change it — this helps the mesh by improving observability.
+
 ::: more "Why v1.15?"
 Version 1.15 is the minimum required for this switch:
 

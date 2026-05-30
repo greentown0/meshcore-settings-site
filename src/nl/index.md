@@ -34,6 +34,8 @@ De onderstaande stappen zijn een verkorte versie van de [volledige schakelinstru
 ::: step 01 "Firmware" "v1.15+"
 Werk zowel je repeater- als companion-firmware bij naar **v1.15+** en zorg ervoor dat je de nieuwste versie van de mobiele app gebruikt.
 
+Als je een repeater hebt, zorg er dan voor dat het 2-byte ID niet botst met een bestaande repeater. Gebruik de [prefix-tool](https://cornmeister.nl/#/analytics?tab=prefix-tool) om te controleren welke prefixen beschikbaar zijn zonder conflict. Als je al een prefix gebruikt die een andere node eerder heeft gekozen, verander deze dan — dit helpt het mesh door de observeerbaarheid te verbeteren.
+
 ::: more "Waarom v1.15?"
 Versie 1.15 is minimaal vereist voor deze omschakeling:
 
