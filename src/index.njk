@@ -1,0 +1,18 @@
+---
+permalink: /index.html
+eleventyExcludeFromCollections: true
+---
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Meshcore Netherlands</title>
+  <script>
+    var lang = (navigator.language || '').toLowerCase();
+    location.replace(lang.startsWith('nl') ? '/nl/' : '/en/');
+  </script>
+</head>
+<body>
+  <p><a href="/en/">English</a> · <a href="/nl/">Nederlands</a></p>
+</body>
+</html>
