@@ -12,6 +12,9 @@ module.exports = function (eleventyConfig) {
     cliCounter = 0;
   });
 
+  // JSON-encode a value for safe inline use (used for JSON-LD in templates)
+  eleventyConfig.addFilter("tojson", (val) => JSON.stringify(val));
+
   const md = markdownIt({
     html: true,
     breaks: false,

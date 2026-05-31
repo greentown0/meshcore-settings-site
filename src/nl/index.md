@@ -1,12 +1,30 @@
 ---
 layout: base.njk
-title: Dutch Meshcore — Instellingen
-description: "SF7-instellingen voor het Dutch Meshcore-mesh"
+title: Aanbevolen Meshcore-instellingen voor Nederland
+seo_title: "Meshcore Nederland — SF7-instellingen & overstapgids"
+description: "Aanbevolen Meshcore-radio-instellingen voor het meshnetwerk in Nederland — SF7, regio-scoping, advertentie-intervallen en een stapsgewijze overstapgids."
+howto_steps:
+  - name: "Firmware"
+    text: "Werk je repeater- en companion-firmware bij naar v1.15+ en gebruik de nieuwste versie van de mobiele app. Controleer of het 2-byte ID van je repeater niet botst met een bestaand knooppunt."
+  - name: "Advert interval"
+    text: "Stel je flood advert interval in op 50 uur of meer. Zero-hop advertenties: 240 minuten (4 uur). Beide instellingen vind je in het beheerscherm van je repeater."
+  - name: "Stop bots & scripts"
+    text: "Controleer en stop geautomatiseerde integraties — Home Assistant, eigen scripts en auto-reply bots in gedeelde kanalen zoals #test."
+  - name: "Regioscoping"
+    text: "Configureer regio's op je repeater (region put eu/nl/provincie) en stel je standaardregio in. Stel per kanaal een scope in via Experimentele Instellingen in je companion app."
+  - name: "Multi-byte pad"
+    text: "Schakel 2-byte pad-hashing in via Experimentele Instellingen → Default Path Hash Size = 2-byte in de companion app, en via set path.hash.mode 1 op de repeater."
+  - name: "Lusdetectie"
+    text: "Schakel lusdetectie in (set loop.detect minimal) en handhaaf de 10%-zendtijdlimiet (set dutycycle 10) via de repeater CLI."
+  - name: "Radioinstelling wijzigen"
+    text: "Stel in de Meshcore app het radio preset in op Custom. Voer SF7 / CR5, 869.618 MHz, 62.5 kHz in. Bevestig dat je buren hoort op de nieuwe instellingen."
+  - name: "Strikte regio-doorsturing"
+    text: "Vanaf 13 juni 2026: pas region denyf * toe op je repeater. Dit instrueert je repeater om elk inkomend pakket zonder regiotag stil te verwijderen."
 ---
 
 ## Waarom zijn we overgeschakeld?
 
-Het Dutch Meshcore-mesh was zwaar overbelast en steeds onbetrouwbaarder. Community-tests in maart 2026 bevestigden dat overstappen naar SF7 de netwerkcapaciteit aanzienlijk vergroot en de betrouwbaarheid voor iedereen verbetert.
+Het Meshcore-meshnetwerk in Nederland was zwaar overbelast en steeds onbetrouwbaarder. Community-tests in maart 2026 bevestigden dat overstappen naar SF7 de netwerkcapaciteit aanzienlijk vergroot en de betrouwbaarheid voor iedereen verbetert.
 
 - [Testvoorbereiding (PDF) ↗](https://assets.woodwar.com/meshcore_sf_test_plan.pdf) — het testplan, de procedure en instellingen van het maart 2026 testweekend
 - [Testrapport (PDF) ↗](https://assets.woodwar.com/meshcore_sf_test_report.pdf) — volledige analyse van de resultaten, inclusief data, bevindingen en de aanbeveling om over te stappen naar SF7

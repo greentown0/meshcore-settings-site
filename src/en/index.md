@@ -1,12 +1,30 @@
 ---
 layout: base.njk
-title: Dutch Meshcore — Settings
-description: "SF7 settings for the Dutch Meshcore mesh"
+title: Recommended Meshcore settings for the Netherlands
+seo_title: "Meshcore Netherlands — SF7 Settings & Switch Guide"
+description: "Recommended Meshcore radio settings for the mesh network in the Netherlands — SF7, region scoping, advert intervals, and a step-by-step switch guide."
+howto_steps:
+  - name: "Firmware"
+    text: "Update both your repeater and companion firmware to v1.15+ and use the latest version of the mobile app. Check that your repeater's 2-byte ID does not conflict with an existing node."
+  - name: "Advert interval"
+    text: "Set your flood advert interval to 50 hours or more. Zero-hop adverts should be 240 minutes (4 hours). Both settings are in your repeater's administration screen."
+  - name: "Stop bots & scripts"
+    text: "Review and stop any automated integrations — Home Assistant, custom scripts, and auto-reply bots in shared channels such as #test."
+  - name: "Region scoping"
+    text: "Configure regions on your repeater (region put eu/nl/province) and set your default region. Set a scope per channel in your companion app's Experimental Settings."
+  - name: "Multi-byte path"
+    text: "Enable 2-byte path hashing on your companion app (Experimental Settings → Default Path Hash Size = 2-byte) and on your repeater (set path.hash.mode 1)."
+  - name: "Loop detection"
+    text: "Enable loop detection (set loop.detect minimal) and enforce the 10% airtime duty cycle limit (set dutycycle 10) in the repeater CLI."
+  - name: "Switch radio settings"
+    text: "In the Meshcore app, set the radio preset to Custom. Enter SF7 / CR5, 869.618 MHz, 62.5 kHz. Confirm you can hear neighbours on the new settings."
+  - name: "Strict region forwarding"
+    text: "From 13 June 2026: apply region denyf * on your repeater to enable strict region forwarding. This instructs your repeater to drop any incoming packet that carries no region scope."
 ---
 
 ## Why we switched
 
-The Dutch Meshcore mesh was heavily congested and increasingly unreliable. Community testing in March 2026 confirmed that switching to SF7 significantly increases network capacity and improves reliability for everyone.
+The Meshcore mesh network in the Netherlands was heavily congested and increasingly unreliable. Community testing in March 2026 confirmed that switching to SF7 significantly increases network capacity and improves reliability for everyone.
 
 - [Test preparation (PDF) ↗](https://assets.woodwar.com/meshcore_sf_test_plan.pdf) — the test plan, procedure, and settings used during the March 2026 weekend test
 - [Test report (PDF) ↗](https://assets.woodwar.com/meshcore_sf_test_report.pdf) — full analysis of the results, including data, findings, and the recommendation to switch to SF7
