@@ -11,5 +11,8 @@ module.exports = () => {
     process.env.SITE_URL ||
     process.env.CF_PAGES_URL ||
     "https://settings.woodwar.com";
-  return { url: raw.replace(/\/$/, "") };
+  return {
+    url: raw.replace(/\/$/, ""),
+    buildDate: new Date().toISOString().split("T")[0],
+  };
 };

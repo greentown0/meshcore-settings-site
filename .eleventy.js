@@ -105,6 +105,7 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.setLibrary("md", md);
   eleventyConfig.addPassthroughCopy("src/assets");
+  eleventyConfig.addPassthroughCopy("src/_redirects");
 
   return {
     dir: {
