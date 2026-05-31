@@ -1,6 +1,6 @@
 # Meshcore Netherlands — SF7 Settings site
 
-Static bilingual site (EN / NL) built with [Eleventy](https://www.11ty.dev/) + Markdown. Deployed to Cloudflare Pages.
+Static bilingual site (EN / NL) built with [Eleventy](https://www.11ty.dev/) + Markdown. Deployed to Cloudflare Workers.
 
 ## Edit content
 
@@ -37,41 +37,66 @@ npm start     # dev server at http://localhost:8080 with live reload
 npm run build   # outputs to _site/
 ```
 
-## Deploy (Cloudflare Pages)
+## How Cloudflare Workers is used
 
-1. Push this repository to GitHub.
-2. In the Cloudflare Pages dashboard, connect the GitHub repository.
-3. Use these build settings:
-   - **Framework preset**: Eleventy
-   - **Build command**: `npm run build`
-   - **Output directory**: `_site`
-   - **Node version**: leave blank — Cloudflare reads `.nvmrc` automatically.
-4. Set the `SITE_URL` environment variable to your production domain (see below).
-5. Every push to `main` triggers a new deployment automatically.
+This site uses **Cloudflare Workers Assets** — a Cloudflare product that combines
+a static file host with a programmable edge worker. It is configured in `wrangler.jsonc`
+and deployed with `wrangler deploy`.
+
+### Static assets
+
+Eleventy builds the site into `_site/`. Cloudflare serves those files globally from
+its CDN, the same way it would for any static site.
+
+### Edge worker (`worker.js`)
+
+On top of the static files, a thin Cloudflare Worker runs at the CDN edge for every
+request to `/`. It reads the browser's `Accept-Language` header and issues a 302
+redirect to `/nl/` for Dutch speakers or `/en/` for everyone else — all before a
+single byte of HTML is sent to the browser.
+
+```
+GET /
+Accept-Language: nl-NL, nl;q=0.9  →  302 /nl/
+Accept-Language: en-US, en;q=0.9  →  302 /en/
+```
+
+Any request that is not `/` (the two language pages, assets, sitemap, etc.) is passed
+straight through to the static asset handler via `env.ASSETS.fetch(request)`.
+
+### Local dev vs. production
+
+The Eleventy dev server (`npm start`) does not run `worker.js`. Instead, `src/index.njk`
+generates a `_site/index.html` with the same JS redirect logic so that navigating to
+`localhost:8080/` still works. In production this file is never reached because the
+worker intercepts the request first.
+
+## Deploy
+
+```bash
+npm run deploy   # builds _site/ then runs wrangler deploy
+```
 
 ### Setting the canonical domain (`SITE_URL`)
 
-All absolute URLs in the build (canonical, hreflang, Open Graph, sitemap, robots.txt)
-are driven by a single environment variable. **Set it once and nothing else needs
-touching when you change domains.**
+All absolute URLs in the build (canonical tag, hreflang, Open Graph, sitemap,
+robots.txt) are driven by a single environment variable. Set it once in the
+Cloudflare dashboard and nothing else needs touching when you change domains.
 
-In the Cloudflare Pages dashboard → **Settings → Environment variables**:
+In the [Cloudflare dashboard](https://dash.cloudflare.com) → Workers & Pages →
+your Worker → **Settings → Variables and Secrets**:
 
 ```
 SITE_URL = https://yourdomain.com
 ```
 
-That's it. No other changes needed.
-
 **How it works:**
 
-| Env variable set? | URL used |
+| Env variable | When it applies |
 |---|---|
-| `SITE_URL` set | Uses `SITE_URL` |
-| Only Cloudflare's `CF_PAGES_URL` present (preview builds) | Uses `CF_PAGES_URL` |
-| Neither set (local dev) | Falls back to `https://settings.woodwar.com` |
-
-The fallback in `src/_data/site.js` is only used locally. Production always reads from the env variable.
+| `SITE_URL` set in dashboard | Production — always use this |
+| `CF_PAGES_URL` | Injected by Cloudflare for preview deployments |
+| Neither set | Falls back to `https://settings.woodwar.com` (local dev only) |
 
 ## Generate the Open Graph share image
 
