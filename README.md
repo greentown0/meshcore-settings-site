@@ -101,9 +101,11 @@ src/
     main.css            ← stylesheet
     main.js             ← copy-to-clipboard + popover behaviour
     og-image.png        ← Open Graph share image (1200×630)
-  index.njk             ← root redirect page (geo-detects EN/NL)
+  _redirects            ← Cloudflare Pages redirect rules (future use)
   sitemap.njk           → builds /sitemap.xml
   robots.njk            → builds /robots.txt
+functions/
+  index.js              ← Cloudflare Pages Function: geo-redirect / → /nl/ or /en/
 scripts/
   gen-og-image.js       ← generates og-image.png (run manually)
 .eleventy.js            ← build config
