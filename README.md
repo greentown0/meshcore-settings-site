@@ -101,12 +101,12 @@ src/
     main.css            ← stylesheet
     main.js             ← copy-to-clipboard + popover behaviour
     og-image.png        ← Open Graph share image (1200×630)
-  _redirects            ← Cloudflare Pages redirect rules (future use)
+  _redirects            ← Cloudflare Workers redirect rules (future use)
   sitemap.njk           → builds /sitemap.xml
   robots.njk            → builds /robots.txt
-functions/
-  index.js              ← Cloudflare Pages Function: geo-redirect / → /nl/ or /en/
 scripts/
   gen-og-image.js       ← generates og-image.png (run manually)
+worker.js               ← Cloudflare Workers entry point: language redirect / → /nl/ or /en/
+wrangler.jsonc          ← Cloudflare Workers deployment config
 .eleventy.js            ← build config
 ```
