@@ -17,7 +17,7 @@ howto_steps:
   - name: "Loop detection"
     text: "Enable loop detection (set loop.detect minimal) and enforce the 10% airtime duty cycle limit (set dutycycle 10) in the repeater CLI."
   - name: "Switch radio settings"
-    text: "In the Meshcore app, set the radio preset to Custom. Enter SF7 / CR5, 869.618 MHz, 62.5 kHz. Confirm you can hear neighbours on the new settings."
+    text: "In the Meshcore app, set the radio preset to Netherlands. Enter SF7 / CR5, 869.618 MHz, 62.5 kHz. Confirm you can hear neighbours on the new settings."
   - name: "Strict region forwarding"
     text: "From 13 June 2026: apply region denyf * on your repeater to enable strict region forwarding. This instructs your repeater to drop any incoming packet that carries no region scope."
 ---
@@ -34,7 +34,7 @@ The Meshcore mesh network in the Netherlands was heavily congested and increasin
 ::: settings
 | Parameter | Value |
 | :--- | :--- |
-| Radio preset | Custom |
+| Radio preset | Netherlands |
 | SF / CR | SF7 / CR5 |
 | Frequency | 869.618 MHz |
 | Bandwidth | 62.5 kHz |
@@ -141,7 +141,7 @@ Options: `off` (default) · `minimal` · `moderate` · `strict` — `minimal` is
 :::
 
 ::: step 07 "Switch radio settings" "SF7 / CR5"
-In the Meshcore app, open your repeater settings and set the radio preset to **Custom**. Enter the following parameters manually:
+In the Meshcore app, open your repeater settings and set the radio preset to **Netherlands**. Enter the following parameters manually:
 
 Only the spreading factor and coding rate change — the frequency (869.618 MHz) is identical to the current SF8 setting.
 
@@ -149,7 +149,7 @@ After applying the preset, confirm you can hear your neighbours on the new setti
 
 ::: cli "New radio settings"
 ```
-Preset:     Custom
+Preset:     Netherlands
 SF / CR:    SF7 / CR5
 Frequency:  869.618 MHz
 Bandwidth:  62.5 kHz

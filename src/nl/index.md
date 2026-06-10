@@ -17,7 +17,7 @@ howto_steps:
   - name: "Lusdetectie"
     text: "Schakel lusdetectie in (set loop.detect minimal) en handhaaf de 10%-zendtijdlimiet (set dutycycle 10) via de repeater CLI."
   - name: "Radioinstelling wijzigen"
-    text: "Stel in de Meshcore app het radio preset in op Custom. Voer SF7 / CR5, 869.618 MHz, 62.5 kHz in. Bevestig dat je buren hoort op de nieuwe instellingen."
+    text: "Stel in de Meshcore app het radio preset in op Netherlands. Voer SF7 / CR5, 869.618 MHz, 62.5 kHz in. Bevestig dat je buren hoort op de nieuwe instellingen."
   - name: "Strikte regio-doorsturing"
     text: "Vanaf 13 juni 2026: pas region denyf * toe op je repeater. Dit instrueert je repeater om elk inkomend pakket zonder regiotag stil te verwijderen."
 ---
@@ -34,7 +34,7 @@ Het Meshcore-meshnetwerk in Nederland was zwaar overbelast en steeds onbetrouwba
 ::: settings
 | Parameter | Waarde |
 | :--- | :--- |
-| Radio preset | Custom |
+| Radio preset | Netherlands |
 | SF / CR | SF7 / CR5 |
 | Frequentie | 869.618 MHz |
 | Bandbreedte | 62.5 kHz |
@@ -141,7 +141,7 @@ Opties: `off` (standaard) · `minimal` · `moderate` · `strict` — `minimal` i
 :::
 
 ::: step 07 "Radioinstelling wijzigen" "SF7 / CR5"
-Open in de Meshcore app de instellingen van je repeater en stel het radio preset in op **Custom**. Voer de volgende parameters handmatig in:
+Open in de Meshcore app de instellingen van je repeater en stel het radio preset in op **Netherlands**. Voer de volgende parameters handmatig in:
 
 Alleen de spreidingsfactor en coderingsnelheid veranderen — de frequentie (869.618 MHz) is identiek aan de huidige SF8-instelling.
 
@@ -149,7 +149,7 @@ Bevestig na het toepassen van de preset dat je je buren kunt horen op de nieuwe 
 
 ::: cli "Nieuwe radio-instellingen"
 ```
-Preset:      Custom
+Preset:      Netherlands
 SF / CR:     SF7 / CR5
 Frequentie:  869.618 MHz
 Bandbreedte: 62.5 kHz
