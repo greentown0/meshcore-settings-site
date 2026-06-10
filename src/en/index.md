@@ -95,7 +95,7 @@ Community tools make this easy:
 
 Province codes: `nl-gr` · `nl-fr` · `nl-dr` · `nl-ov` · `nl-fl` · `nl-ge` · `nl-ut` · `nl-nh` · `nl-zh` · `nl-ze` · `nl-nb` · `nl-li`
 
-**⚠ `region denyf *` is Phase 8 — 13 June 2026.** Do not run it yet. Enabling it before then will cause your repeater to drop messages from nodes that have not yet configured region scoping.
+**⚠ `region denyf *` is Phase 8 — 18 July 2026.** Do not run it yet. Enabling it before then will cause your repeater to drop messages from nodes that have not yet configured region scoping.
 
 ::: cli "Repeater CLI"
 ```
@@ -107,7 +107,7 @@ region put YOUR_CITY
 region default YOUR_PROVINCE
 region save
 
-# Phase 8 only (13 June 2026):
+# Phase 8 only (18 July 2026):
 region denyf *
 region save
 ```
@@ -160,9 +160,11 @@ Bandwidth:  62.5 kHz
 
 Approximately one month after the main switch, the community will enable strict region forwarding. This turns the mesh into connected regional zones — problems or congestion in one area no longer cascade across the whole network, and adverts are scoped to their region.
 
-Phase 8 date: **13 June 2026.** Only step 8 needs to happen on this date.
+Phase 8 date: **18 July 2026.** Only step 8 needs to happen on this date.
 
-::: step 08 "Strict region forwarding" "13 Jun 2026"
+This date has been postponed to allow more time for region adoption across the mesh. Wide region adoption is a pre-requisite for strict forwarding: enabling `region denyf *` before enough nodes carry a region tag would cause the mesh to silently drop a significant portion of traffic.
+
+::: step 08 "Strict region forwarding" "18 Jul 2026"
 Apply the final region command on your repeater. This instructs your repeater to silently drop any incoming packet that carries no region scope — from this point, every message entering your repeater must carry an explicit region tag. This creates a strong incentive for all operators to configure regions correctly, and results in a more stable and reliable mesh for the whole community.
 
 From the **UI**: In the Manage Regions screen, set **Deny Flood** in the **Packets without region set** option.

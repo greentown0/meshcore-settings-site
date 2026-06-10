@@ -95,7 +95,7 @@ Community-tools maken dit eenvoudig:
 
 Provinciecodes: `nl-gr` · `nl-fr` · `nl-dr` · `nl-ov` · `nl-fl` · `nl-ge` · `nl-ut` · `nl-nh` · `nl-zh` · `nl-ze` · `nl-nb` · `nl-li`
 
-**⚠ `region denyf *` is Fase 8 — 13 juni 2026.** Voer dit nog niet uit. Dit te vroeg inschakelen zorgt ervoor dat je repeater berichten van nodes zonder regioscoping weigert.
+**⚠ `region denyf *` is Fase 8 — 18 juli 2026.** Voer dit nog niet uit. Dit te vroeg inschakelen zorgt ervoor dat je repeater berichten van nodes zonder regioscoping weigert.
 
 ::: cli "Repeater CLI"
 ```
@@ -107,7 +107,7 @@ region put JOUW_STAD
 region default JOUW_PROVINCIE
 region save
 
-# Alleen Fase 8 (13 juni 2026):
+# Alleen Fase 8 (18 juli 2026):
 region denyf *
 region save
 ```
@@ -160,9 +160,11 @@ Bandbreedte: 62.5 kHz
 
 Ongeveer een maand na de hoofdomschakeling schakelt de community strikte regio-doorsturing in. Dit verandert het mesh in verbonden regionale zones — problemen of congestie in één gebied cascaderen niet meer door het hele netwerk, en advertenties zijn beperkt tot hun regio.
 
-Fase 8 datum: **13 juni 2026.** Alleen stap 8 moet op deze datum worden uitgevoerd.
+Fase 8 datum: **18 juli 2026.** Alleen stap 8 moet op deze datum worden uitgevoerd.
 
-::: step 08 "Strikte regio-doorsturing" "13 jun 2026"
+Deze datum is uitgesteld om het mesh meer tijd te geven voor brede regio-adoptie. Brede regio-adoptie is een vereiste voor strikte doorsturing: `region denyf *` inschakelen voordat genoeg nodes een regiotag dragen, zou ertoe leiden dat het mesh een aanzienlijk deel van het verkeer stil verwijdert.
+
+::: step 08 "Strikte regio-doorsturing" "18 jul 2026"
 Pas de definitieve regio-opdracht toe op je repeater. Dit instrueert je repeater om elk inkomend pakket zonder regioscoping stil te verwijderen — vanaf dit moment moet elk bericht dat je repeater binnenkomt een expliciete regiotag bevatten. Dit creëert een sterke prikkel voor alle operators om regio's correct te configureren, en resulteert in een stabielere en betrouwbaardere mesh voor de hele community.
 
 Vanuit de **UI**: Stel in het scherm Regio's Beheren bij de optie **Pakketten zonder regio ingesteld** de waarde in op **Flood weigeren**.
