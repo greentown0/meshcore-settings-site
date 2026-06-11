@@ -19,7 +19,7 @@ howto_steps:
   - name: "Radioinstelling wijzigen"
     text: "Stel in de Meshcore app het radio preset in op Netherlands. Voer SF7 / CR5, 869.618 MHz, 62.5 kHz in. Bevestig dat je buren hoort op de nieuwe instellingen."
   - name: "Strikte regio-doorsturing"
-    text: "Vanaf 13 juni 2026: pas region denyf * toe op je repeater. Dit instrueert je repeater om elk inkomend pakket zonder regiotag stil te verwijderen."
+    text: "Vanaf 18 juli 2026: pas region denyf * toe op je repeater. Dit instrueert je repeater om elk inkomend pakket zonder regiotag stil te verwijderen."
 ---
 
 ## Waarom zijn we overgeschakeld?
@@ -84,7 +84,7 @@ Controleer en stop geautomatiseerde integraties — Home Assistant, eigen script
 ::: step 04 "Regioscoping" "eu · nl · provincie"
 Configureer regio's op je **repeater** en stel scope in via je **companion app**. Dit is een van de meest effectieve wijzigingen om congestie te verminderen.
 
-Twee taken nu uit te voeren: regiocodes toevoegen aan je repeater en je standaardregio instellen. Ongescopede pakketten blokkeren (strikte doorsturing) is een aparte fase gepland voor **13 juni 2026** — pas dit nog niet toe.
+Twee taken nu uit te voeren: regiocodes toevoegen aan je repeater en je standaardregio instellen. Ongescopede pakketten blokkeren (strikte doorsturing) is een aparte fase gepland voor **18 juli 2026** — pas dit nog niet toe.
 
 Community-tools maken dit eenvoudig:
 - [All-in-one configurator →](https://www.mesh-up.nl/tools/regiocodes-instellen/)
@@ -164,7 +164,7 @@ Fase 8 datum: **18 juli 2026.** Alleen stap 8 moet op deze datum worden uitgevoe
 
 Deze datum is uitgesteld om het mesh meer tijd te geven voor brede regio-adoptie. Brede regio-adoptie is een vereiste voor strikte doorsturing: `region denyf *` inschakelen voordat genoeg nodes een regiotag dragen, zou ertoe leiden dat het mesh een aanzienlijk deel van het verkeer stil verwijdert.
 
-::: step 08 "Strikte regio-doorsturing" "18 jul 2026"
+::: step 08 "Strikte regio-doorsturing" "<span style='color:var(--c-red)'>uitgesteld</span> · 18 jul 2026"
 Pas de definitieve regio-opdracht toe op je repeater. Dit instrueert je repeater om elk inkomend pakket zonder regioscoping stil te verwijderen — vanaf dit moment moet elk bericht dat je repeater binnenkomt een expliciete regiotag bevatten. Dit creëert een sterke prikkel voor alle operators om regio's correct te configureren, en resulteert in een stabielere en betrouwbaardere mesh voor de hele community.
 
 Vanuit de **UI**: Stel in het scherm Regio's Beheren bij de optie **Pakketten zonder regio ingesteld** de waarde in op **Flood weigeren**.

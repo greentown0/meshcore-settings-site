@@ -43,7 +43,7 @@ module.exports = function (eleventyConfig) {
         if (tokens[idx].nesting === 1) {
           const num = m[1].padStart(2, "0");
           const title = md.utils.escapeHtml(m[2]);
-          const summary = md.utils.escapeHtml(m[3]);
+          const summary = m[3];
           return `<article class="step" id="step-${num}">
 <div class="step__head">
 <span class="step__num" aria-hidden="true">${num}</span>

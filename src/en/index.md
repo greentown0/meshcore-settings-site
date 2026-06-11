@@ -19,7 +19,7 @@ howto_steps:
   - name: "Switch radio settings"
     text: "In the Meshcore app, set the radio preset to Netherlands. Enter SF7 / CR5, 869.618 MHz, 62.5 kHz. Confirm you can hear neighbours on the new settings."
   - name: "Strict region forwarding"
-    text: "From 13 June 2026: apply region denyf * on your repeater to enable strict region forwarding. This instructs your repeater to drop any incoming packet that carries no region scope."
+    text: "From 18 July 2026: apply region denyf * on your repeater to enable strict region forwarding. This instructs your repeater to drop any incoming packet that carries no region scope."
 ---
 
 ## Why we switched
@@ -84,7 +84,7 @@ Review and stop any automated integrations — Home Assistant, custom scripts, a
 ::: step 04 "Region scoping" "eu · nl · province"
 Configure regions on your **repeater** and set scope in your **companion app**. This is one of the most impactful changes you can make to reduce congestion.
 
-Two tasks to complete now: add your region codes to the repeater and set your default region. Blocking unscoped packets (strict forwarding) is a separate phase scheduled for **13 June 2026** — do not apply it yet.
+Two tasks to complete now: add your region codes to the repeater and set your default region. Blocking unscoped packets (strict forwarding) is a separate phase scheduled for **18 July 2026** — do not apply it yet.
 
 Community tools make this easy:
 - [All-in-one configurator →](https://www.mesh-up.nl/tools/regiocodes-instellen/)
@@ -164,7 +164,7 @@ Phase 8 date: **18 July 2026.** Only step 8 needs to happen on this date.
 
 This date has been postponed to allow more time for region adoption across the mesh. Wide region adoption is a pre-requisite for strict forwarding: enabling `region denyf *` before enough nodes carry a region tag would cause the mesh to silently drop a significant portion of traffic.
 
-::: step 08 "Strict region forwarding" "18 Jul 2026"
+::: step 08 "Strict region forwarding" "<span style='color:var(--c-red)'>postponed</span> · 18 Jul 2026"
 Apply the final region command on your repeater. This instructs your repeater to silently drop any incoming packet that carries no region scope — from this point, every message entering your repeater must carry an explicit region tag. This creates a strong incentive for all operators to configure regions correctly, and results in a more stable and reliable mesh for the whole community.
 
 From the **UI**: In the Manage Regions screen, set **Deny Flood** in the **Packets without region set** option.
