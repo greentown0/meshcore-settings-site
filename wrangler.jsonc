@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "meshcore-settings-site",
+  "name": "dutch-mesh-settings-site",
   "main": "worker.js",
   "compatibility_date": "2026-04-29",
   "observability": {
