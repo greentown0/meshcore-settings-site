@@ -1,9 +1,9 @@
 {
   "lang": "nl",
   "brand": "Meshcore Nederland",
-  "nav_switch_link": "Schakelinstructies",
+  "nav_switch_link": "Historische overstapgids",
   "nav_aria_label": "Bronnen",
   "lang_switcher_aria_label": "Taalwissel",
-  "footer_community": "Dutch Meshcore community · Gebaseerd op het SF testweekend (6–8 maart 2026)",
+  "footer_community": "Dutch Meshcore community",
   "footer_questions": "Vragen? Stel ze in de <a href=\"https://t.me/meshcorenet\" target=\"_blank\" rel=\"noopener\">community chat</a>."
 }

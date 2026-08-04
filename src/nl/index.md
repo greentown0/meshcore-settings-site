@@ -1,13 +1,13 @@
 ---
 layout: base.njk
 title: Aanbevolen Meshcore-instellingen voor Nederland
-seo_title: "Meshcore Nederland — SF7-instellingen & overstapgids"
-description: "Aanbevolen Meshcore-radio-instellingen voor het meshnetwerk in Nederland — SF7, regio-scoping, advertentie-intervallen en een stapsgewijze overstapgids."
+seo_title: "Meshcore Nederland — Aanbevolen SF7-instellingen"
+description: "Aanbevolen Meshcore-radio-instellingen voor het meshnetwerk in Nederland — SF7, regio-scoping, advertentie-intervallen en een stapsgewijze configuratiegids."
 howto_steps:
   - name: "Firmware"
     text: "Werk je repeater- en companion-firmware bij naar v1.15+ en gebruik de nieuwste versie van de mobiele app. Controleer of het 2-byte ID van je repeater niet botst met een bestaand knooppunt."
   - name: "Advert interval"
-    text: "Stel je flood advert interval in op 50 uur of meer. Zero-hop advertenties: 240 minuten (4 uur). Beide instellingen vind je in het beheerscherm van je repeater."
+    text: "Stel je flood advert interval in op 47 uur of meer. Zero-hop advertenties: 240 minuten (4 uur). Beide instellingen vind je in het beheerscherm van je repeater."
   - name: "Stop bots & scripts"
     text: "Controleer en stop geautomatiseerde integraties — Home Assistant, eigen scripts en auto-reply bots in gedeelde kanalen zoals #test."
   - name: "Regioscoping"
@@ -16,18 +16,11 @@ howto_steps:
     text: "Schakel 2-byte pad-hashing in via Experimentele Instellingen → Default Path Hash Size = 2-byte in de companion app, en via set path.hash.mode 1 op de repeater."
   - name: "Lusdetectie"
     text: "Schakel lusdetectie in (set loop.detect minimal) en handhaaf de 10%-zendtijdlimiet (set dutycycle 10) via de repeater CLI."
-  - name: "Radioinstelling wijzigen"
-    text: "Stel in de Meshcore app het radio preset in op Netherlands. Voer SF7 / CR5, 869.618 MHz, 62.5 kHz in. Bevestig dat je buren hoort op de nieuwe instellingen."
+  - name: "Radio-instellingen"
+    text: "Stel in de Meshcore app het radio preset in op Netherlands. Voer SF7 / CR5, 869.618 MHz, 62.5 kHz in. Bevestig dat je buren hoort met de ingestelde configuratie."
   - name: "Strikte regio-doorsturing"
-    text: "Vanaf 18 juli 2026: pas region denyf * toe op je repeater. Dit instrueert je repeater om elk inkomend pakket zonder regiotag stil te verwijderen."
+    text: "Pas na het configureren van je regio's region denyf * toe op je repeater om strikte regio-doorsturing in te schakelen. Dit instrueert je repeater om elk inkomend pakket zonder regiotag stil te verwijderen."
 ---
-
-## Waarom zijn we overgeschakeld?
-
-Het Meshcore-meshnetwerk in Nederland was zwaar overbelast en steeds onbetrouwbaarder. Community-tests in maart 2026 bevestigden dat overstappen naar SF7 de netwerkcapaciteit aanzienlijk vergroot en de betrouwbaarheid voor iedereen verbetert.
-
-- [Testvoorbereiding (PDF) ↗](https://assets.woodwar.com/meshcore_sf_test_plan.pdf) — het testplan, de procedure en instellingen van het maart 2026 testweekend
-- [Testrapport (PDF) ↗](https://assets.woodwar.com/meshcore_sf_test_report.pdf) — volledige analyse van de resultaten, inclusief data, bevindingen en de aanbeveling om over te stappen naar SF7
 
 ## Instellingen in één oogopslag
 
@@ -38,15 +31,15 @@ Het Meshcore-meshnetwerk in Nederland was zwaar overbelast en steeds onbetrouwba
 | SF / CR | SF7 / CR5 |
 | Frequentie | 869.618 MHz |
 | Bandbreedte | 62.5 kHz |
-| Advert interval | 50 u+ (flood) |
+| Advert interval | 47 u+ (flood) |
 | Firmware | v1.15+ |
 :::
 
-## Voorbereidingsstappen
+## Aanbevolen configuratie
 
 Voer alle stappen uit. Sla er geen over.
 
-De onderstaande stappen zijn een verkorte versie van de [volledige schakelinstructies (PDF) ↗](https://assets.woodwar.com/meshcore_sf7_switch_instructions.pdf).
+Lees voor achtergrondinformatie over de overstap en meer details over elk van de instellingen de [historische schakelinstructies (PDF) ↗](https://assets.woodwar.com/meshcore_sf7_switch_instructions.pdf).
 
 
 ::: step 01 "Firmware" "v1.15+"
@@ -55,7 +48,7 @@ Werk zowel je repeater- als companion-firmware bij naar **v1.15+** en zorg ervoo
 Als je een repeater hebt, zorg er dan voor dat het 2-byte ID niet botst met een bestaande repeater. Gebruik de [prefix-tool](https://cornmeister.nl/#/analytics?tab=prefix-tool) om te controleren welke prefixen beschikbaar zijn zonder conflict. Als je al een prefix gebruikt die een andere node eerder heeft gekozen, verander deze dan — dit helpt het mesh door de observeerbaarheid te verbeteren.
 
 ::: more "Waarom v1.15?"
-Versie 1.15 is minimaal vereist voor deze omschakeling:
+Versie 1.15 is minimaal vereist voor deze instellingen:
 
 - **Standaard regioscoping** — de repeater kan zijn eigen verkeer automatisch markeren met een regio.
 - **Correct pakket blokkeren** — `region denyf *` werkt pas betrouwbaar vanaf v1.15.
@@ -63,18 +56,26 @@ Versie 1.15 is minimaal vereist voor deze omschakeling:
 Updates bevatten ook verbeteringen voor congestiebeheer.
 :::
 
-::: step 02 "Advert interval" "minimaal 50 uur"
-Stel je **flood advert interval in op 50 uur** of meer. Zero-hop advertenties moeten **240 minuten** (4 uur) zijn.
+:::: step 02 "Advert interval" "minimaal 47 uur"
+Stel je **flood advert interval in op 47 uur** of meer. Zero-hop advertenties moeten **240 minuten** (4 uur) zijn.
+
+::: cli "Repeater CLI"
+```
+set flood.advert.interval 47
+set advert.interval 240
+```
+:::
 
 ::: more "Flood vs zero-hop advertenties"
 Bezoek [mc-radar.woodwar.com/mesh-health](https://mc-radar.woodwar.com/mesh-health) om te controleren of je node vermeld staat. Nodes die daar voorkomen hebben een te kort advert interval en veroorzaken onnodige belasting op het mesh. Als jouw node verschijnt, herstel dit dan.
 
-**Flood advertenties** reizen door het gehele mesh en kondigen je repeater aan bij het volledige netwerk. Ze te vaak sturen is een hoofdoorzaak van congestie. Stel in op minimaal **50 uur** — hoger is prima.
+**Flood advertenties** reizen door het gehele mesh en kondigen je repeater aan bij het volledige netwerk. Ze te vaak sturen is een hoofdoorzaak van congestie. Stel in op minimaal **47 uur** — hoger is prima.
 
 **Zero-hop advertenties** worden alleen gehoord door je directe buren. **240 minuten** (4 uur) is het aanbevolen interval.
 
 Beide instellingen zijn te vinden in het beheerscherm van je repeater.
 :::
+::::
 
 ::: step 03 "Stop bots & scripts" "Geen automatische berichten"
 Controleer en stop geautomatiseerde integraties — Home Assistant, eigen scripts, auto-reply bots in gedeelde kanalen zoals **#test**.
@@ -84,7 +85,7 @@ Controleer en stop geautomatiseerde integraties — Home Assistant, eigen script
 ::: step 04 "Regioscoping" "eu · nl · provincie"
 Configureer regio's op je **repeater** en stel scope in via je **companion app**. Dit is een van de meest effectieve wijzigingen om congestie te verminderen.
 
-Twee taken nu uit te voeren: regiocodes toevoegen aan je repeater en je standaardregio instellen. Ongescopede pakketten blokkeren (strikte doorsturing) is een aparte fase gepland voor **18 juli 2026** — pas dit nog niet toe.
+Voeg eerst je regiocodes toe aan de repeater en stel je standaardregio in. Schakel daarna in stap 8 strikte regio-doorsturing in.
 
 Community-tools maken dit eenvoudig:
 - [All-in-one configurator →](https://www.mesh-up.nl/tools/regiocodes-instellen/)
@@ -95,8 +96,6 @@ Community-tools maken dit eenvoudig:
 
 Provinciecodes: `nl-gr` · `nl-fr` · `nl-dr` · `nl-ov` · `nl-fl` · `nl-ge` · `nl-ut` · `nl-nh` · `nl-zh` · `nl-ze` · `nl-nb` · `nl-li`
 
-**⚠ `region denyf *` is Fase 8 — 18 juli 2026.** Voer dit nog niet uit. Dit te vroeg inschakelen zorgt ervoor dat je repeater berichten van nodes zonder regioscoping weigert.
-
 ::: cli "Repeater CLI"
 ```
 region put eu
@@ -105,10 +104,6 @@ region put bx
 region put JOUW_PROVINCIE
 region put JOUW_STAD
 region default JOUW_PROVINCIE
-region save
-
-# Alleen Fase 8 (18 juli 2026):
-region denyf *
 region save
 ```
 :::
@@ -124,13 +119,15 @@ set path.hash.mode 1
 ```
 :::
 
-::: step 06 "Lusdetectie" "set dutycycle 10"
+:::: step 06 "Lusdetectie" "set dutycycle 10"
 Schakel lusdetectie in en handhaaf de zendtijdlimieten. Voer beide opdrachten uit in de repeater CLI:
 
+::: cli "Repeater CLI"
 ```
 set loop.detect minimal
 set dutycycle 10
 ```
+:::
 
 ::: more "Wat doen deze opdrachten?"
 **`set loop.detect minimal`** — Weigert flood-pakketten die lijken te lussen door het mesh. Een defecte node kan een pakket laten circuleren tot de 64-hop limiet, waarbij aanzienlijke zendtijd wordt verbruikt. De instelling `minimal` detecteert duidelijke lussen zonder valse positieven.
@@ -139,13 +136,12 @@ Opties: `off` (standaard) · `minimal` · `moderate` · `strict` — `minimal` i
 
 **`set dutycycle 10`** — Handhaaft 10% dutycycle. Dit is een **wettelijke vereiste** voor gebruik in Europa op het 868 MHz sub-band dat door Meshcore wordt gebruikt.
 :::
+::::
 
-::: step 07 "Radioinstelling wijzigen" "SF7 / CR5"
+::: step 07 "Radio-instellingen" "SF7 / CR5"
 Open in de Meshcore app de instellingen van je repeater en stel het radio preset in op **Netherlands**. Voer de volgende parameters handmatig in:
 
-Alleen de spreidingsfactor en coderingsnelheid veranderen — de frequentie (869.618 MHz) is identiek aan de huidige SF8-instelling.
-
-Bevestig na het toepassen van de preset dat je je buren kunt horen op de nieuwe instellingen voordat je de omschakeling als voltooid beschouwt.
+Bevestig na het toepassen van de preset dat je je buren kunt horen met de ingestelde configuratie.
 
 ::: cli "Nieuwe radio-instellingen"
 ```
@@ -156,16 +152,8 @@ Bandbreedte: 62.5 kHz
 ```
 :::
 
-## Fase 8 — Strikte regio-doorsturing
-
-Ongeveer een maand na de hoofdomschakeling schakelt de community strikte regio-doorsturing in. Dit verandert het mesh in verbonden regionale zones — problemen of congestie in één gebied cascaderen niet meer door het hele netwerk, en advertenties zijn beperkt tot hun regio.
-
-Fase 8 datum: **18 juli 2026.** Alleen stap 8 moet op deze datum worden uitgevoerd.
-
-Deze datum is uitgesteld om het mesh meer tijd te geven voor brede regio-adoptie. Brede regio-adoptie is een vereiste voor strikte doorsturing: `region denyf *` inschakelen voordat genoeg nodes een regiotag dragen, zou ertoe leiden dat het mesh een aanzienlijk deel van het verkeer stil verwijdert.
-
-::: step 08 "Strikte regio-doorsturing" "<span style='color:var(--c-red)'>uitgesteld</span> · 18 jul 2026"
-Pas de definitieve regio-opdracht toe op je repeater. Dit instrueert je repeater om elk inkomend pakket zonder regioscoping stil te verwijderen — vanaf dit moment moet elk bericht dat je repeater binnenkomt een expliciete regiotag bevatten. Dit creëert een sterke prikkel voor alle operators om regio's correct te configureren, en resulteert in een stabielere en betrouwbaardere mesh voor de hele community.
+::: step 08 "Strikte regio-doorsturing" "region denyf *"
+Schakel strikte doorsturing in nadat je stap 4 hebt voltooid. Hiermee worden alleen pakketten **zonder regiotag** geweigerd, zodat ongescoped verkeer niet door heel Europa wordt herhaald. Verkeer met een scope naar aangrenzende provincies, heel Nederland en andere EU-landen blijft gewoon werken.
 
 Vanuit de **UI**: Stel in het scherm Regio's Beheren bij de optie **Pakketten zonder regio ingesteld** de waarde in op **Flood weigeren**.
 
@@ -175,7 +163,6 @@ region denyf *
 region save
 ```
 :::
-Strikte doorsturing blokkeert alleen pakketten die **helemaal geen regiotag** bevatten (en anders door heel Europa herhaald zouden worden, wat de congestie vergroot). Het voorkomt geen communicatie met naburige provincies, met heel Nederland of met de landen in de EU. Het vereist echter wel een beter begrip van de technologie.
 
 ## Probleemoplossing
 
@@ -203,11 +190,20 @@ set path.hash.mode 0
 
 Als regio's niet correct zijn geconfigureerd bij je buurrepeaters, worden de gescopede berichten die je vanuit je companion app verstuurt niet begrepen en worden ze verwijderd. Om dit op te lossen, schakel je de scope uit op het kanaal waarop je berichten verstuurt. Als het probleem dan verdwijnt, is er sprake van een regioconfiguratiefout in je lokale mesh.
 
+## Waarom zijn we overgeschakeld?
+
+Het Meshcore-meshnetwerk in Nederland was zwaar overbelast en steeds onbetrouwbaarder. Community-tests in maart 2026 bevestigden dat overstappen naar SF7 de netwerkcapaciteit aanzienlijk vergroot en de betrouwbaarheid voor iedereen verbetert.
+
+Naar aanleiding van deze resultaten nam het Nederlandse mesh op **9 mei 2026** de huidige SF7-radio-instellingen in gebruik.
+
+- [Testvoorbereiding (PDF) ↗](https://assets.woodwar.com/meshcore_sf_test_plan.pdf) — het testplan, de procedure en instellingen van het maart 2026 testweekend
+- [Testrapport (PDF) ↗](https://assets.woodwar.com/meshcore_sf_test_report.pdf) — volledige analyse van de resultaten, inclusief data, bevindingen en de aanbeveling om over te stappen naar SF7
+
 ## Bronnen
 
 <div class="resources">
   <a href="https://assets.woodwar.com/meshcore_sf7_switch_instructions.pdf" target="_blank" rel="noopener" class="resource-link">
-    Schakelinstructies
+    Historische schakelinstructies
     <span class="resource-link__arrow">PDF document ↗</span>
   </a>
   <a href="https://mc-radar.woodwar.com/mesh-health" target="_blank" rel="noopener" class="resource-link">

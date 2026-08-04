@@ -1,13 +1,13 @@
 ---
 layout: base.njk
 title: Recommended Meshcore settings for the Netherlands
-seo_title: "Meshcore Netherlands — SF7 Settings & Switch Guide"
-description: "Recommended Meshcore radio settings for the mesh network in the Netherlands — SF7, region scoping, advert intervals, and a step-by-step switch guide."
+seo_title: "Meshcore Netherlands — Recommended SF7 Settings"
+description: "Recommended Meshcore radio settings for the mesh network in the Netherlands — SF7, region scoping, advert intervals, and a step-by-step configuration guide."
 howto_steps:
   - name: "Firmware"
     text: "Update both your repeater and companion firmware to v1.15+ and use the latest version of the mobile app. Check that your repeater's 2-byte ID does not conflict with an existing node."
   - name: "Advert interval"
-    text: "Set your flood advert interval to 50 hours or more. Zero-hop adverts should be 240 minutes (4 hours). Both settings are in your repeater's administration screen."
+    text: "Set your flood advert interval to 47 hours or more. Zero-hop adverts should be 240 minutes (4 hours). Both settings are in your repeater's administration screen."
   - name: "Stop bots & scripts"
     text: "Review and stop any automated integrations — Home Assistant, custom scripts, and auto-reply bots in shared channels such as #test."
   - name: "Region scoping"
@@ -16,18 +16,11 @@ howto_steps:
     text: "Enable 2-byte path hashing on your companion app (Experimental Settings → Default Path Hash Size = 2-byte) and on your repeater (set path.hash.mode 1)."
   - name: "Loop detection"
     text: "Enable loop detection (set loop.detect minimal) and enforce the 10% airtime duty cycle limit (set dutycycle 10) in the repeater CLI."
-  - name: "Switch radio settings"
-    text: "In the Meshcore app, set the radio preset to Netherlands. Enter SF7 / CR5, 869.618 MHz, 62.5 kHz. Confirm you can hear neighbours on the new settings."
+  - name: "Radio settings"
+    text: "In the Meshcore app, set the radio preset to Netherlands. Enter SF7 / CR5, 869.618 MHz, 62.5 kHz. Confirm you can hear neighbours with the configured settings."
   - name: "Strict region forwarding"
-    text: "From 18 July 2026: apply region denyf * on your repeater to enable strict region forwarding. This instructs your repeater to drop any incoming packet that carries no region scope."
+    text: "After configuring your regions, apply region denyf * on your repeater to enable strict region forwarding. This instructs your repeater to drop any incoming packet that carries no region scope."
 ---
-
-## Why we switched
-
-The Meshcore mesh network in the Netherlands was heavily congested and increasingly unreliable. Community testing in March 2026 confirmed that switching to SF7 significantly increases network capacity and improves reliability for everyone.
-
-- [Test preparation (PDF) ↗](https://assets.woodwar.com/meshcore_sf_test_plan.pdf) — the test plan, procedure, and settings used during the March 2026 weekend test
-- [Test report (PDF) ↗](https://assets.woodwar.com/meshcore_sf_test_report.pdf) — full analysis of the results, including data, findings, and the recommendation to switch to SF7
 
 ## Settings at a glance
 
@@ -38,15 +31,15 @@ The Meshcore mesh network in the Netherlands was heavily congested and increasin
 | SF / CR | SF7 / CR5 |
 | Frequency | 869.618 MHz |
 | Bandwidth | 62.5 kHz |
-| Advert interval | 50 h+ (flood) |
+| Advert interval | 47 h+ (flood) |
 | Firmware | v1.15+ |
 :::
 
-## Preparation steps
+## Recommended configuration
 
 Complete all steps. Do not skip any.
 
-The steps below are a compressed version of the [full switch instructions (PDF) ↗](https://assets.woodwar.com/meshcore_sf7_switch_instructions.pdf).
+For background on the transition and more details on each of the settings, see the [historical switch instructions (PDF) ↗](https://assets.woodwar.com/meshcore_sf7_switch_instructions.pdf).
 
 
 ::: step 01 "Firmware" "v1.15+"
@@ -55,7 +48,7 @@ Update **both** your repeater and companion firmware to **v1.15+** and make sure
 If you have a repeater, make sure its 2-byte ID does not conflict with an existing repeater. Use the [prefix tool](https://cornmeister.nl/#/analytics?tab=prefix-tool) to check for available prefixes without conflict. If you are already using a prefix that another node chose first, please change it — this helps the mesh by improving observability.
 
 ::: more "Why v1.15?"
-Version 1.15 is the minimum required for this switch:
+Version 1.15 is the minimum required for these settings:
 
 - **Default region scoping** — the repeater can tag its own traffic with a region automatically.
 - **Correct packet blocking** — `region denyf *` only works reliably from v1.15 onwards.
@@ -63,18 +56,26 @@ Version 1.15 is the minimum required for this switch:
 Updates also include improvements to congestion handling.
 :::
 
-::: step 02 "Advert interval" "50 h minimum"
-Set your **flood advert interval to 50 hours** or more. Zero-hop adverts should be **240 minutes** (4 hours).
+:::: step 02 "Advert interval" "47 h minimum"
+Set your **flood advert interval to 47 hours** or more. Zero-hop adverts should be **240 minutes** (4 hours).
+
+::: cli "Repeater CLI"
+```
+set flood.advert.interval 47
+set advert.interval 240
+```
+:::
 
 ::: more "Flood vs zero-hop adverts"
 Visit [mc-radar.woodwar.com/mesh-health](https://mc-radar.woodwar.com/mesh-health) to check whether your node is listed. Nodes there have an advert interval that is too short and are causing unnecessary load on the mesh. If yours appears, fix it.
 
-**Flood adverts** travel across the entire mesh and announce your repeater to the full network. Sending them too often is a leading cause of congestion. Set to at least **50 hours** — higher is fine.
+**Flood adverts** travel across the entire mesh and announce your repeater to the full network. Sending them too often is a leading cause of congestion. Set to at least **47 hours** — higher is fine.
 
 **Zero-hop adverts** are heard only by your immediate neighbours. **240 minutes** (4 hours) is the recommended interval.
 
 Both settings are in your repeater's administration screen.
 :::
+::::
 
 ::: step 03 "Stop bots & scripts" "No auto-messages"
 Review and stop any automated integrations — Home Assistant, custom scripts, auto-reply bots in shared channels such as **#test**.
@@ -84,7 +85,7 @@ Review and stop any automated integrations — Home Assistant, custom scripts, a
 ::: step 04 "Region scoping" "eu · nl · province"
 Configure regions on your **repeater** and set scope in your **companion app**. This is one of the most impactful changes you can make to reduce congestion.
 
-Two tasks to complete now: add your region codes to the repeater and set your default region. Blocking unscoped packets (strict forwarding) is a separate phase scheduled for **18 July 2026** — do not apply it yet.
+First add your region codes to the repeater and set your default region. Once these are configured, enable strict forwarding in step 8.
 
 Community tools make this easy:
 - [All-in-one configurator →](https://www.mesh-up.nl/tools/regiocodes-instellen/)
@@ -95,8 +96,6 @@ Community tools make this easy:
 
 Province codes: `nl-gr` · `nl-fr` · `nl-dr` · `nl-ov` · `nl-fl` · `nl-ge` · `nl-ut` · `nl-nh` · `nl-zh` · `nl-ze` · `nl-nb` · `nl-li`
 
-**⚠ `region denyf *` is Phase 8 — 18 July 2026.** Do not run it yet. Enabling it before then will cause your repeater to drop messages from nodes that have not yet configured region scoping.
-
 ::: cli "Repeater CLI"
 ```
 region put eu
@@ -105,10 +104,6 @@ region put bx
 region put YOUR_PROVINCE
 region put YOUR_CITY
 region default YOUR_PROVINCE
-region save
-
-# Phase 8 only (18 July 2026):
-region denyf *
 region save
 ```
 :::
@@ -124,13 +119,15 @@ set path.hash.mode 1
 ```
 :::
 
-::: step 06 "Loop detection" "set dutycycle 10"
+:::: step 06 "Loop detection" "set dutycycle 10"
 Enable loop detection and enforce airtime limits. Run both commands in the repeater CLI:
 
+::: cli "Repeater CLI"
 ```
 set loop.detect minimal
 set dutycycle 10
 ```
+:::
 
 ::: more "What do these commands do?"
 **`set loop.detect minimal`** — Rejects flood packets that appear to be looping across the mesh. A faulty node can cause a packet to circulate up to the 64-hop limit, consuming significant airtime. The `minimal` setting catches clear loops without false positives.
@@ -139,13 +136,12 @@ Options: `off` (default) · `minimal` · `moderate` · `strict` — `minimal` is
 
 **`set dutycycle 10`** — Enforces 10% duty cycle. This is a **legal requirement** for operation in Europe on the 868 MHz sub-band used by Meshcore.
 :::
+::::
 
-::: step 07 "Switch radio settings" "SF7 / CR5"
+::: step 07 "Radio settings" "SF7 / CR5"
 In the Meshcore app, open your repeater settings and set the radio preset to **Netherlands**. Enter the following parameters manually:
 
-Only the spreading factor and coding rate change — the frequency (869.618 MHz) is identical to the current SF8 setting.
-
-After applying the preset, confirm you can hear your neighbours on the new settings before considering the switch complete.
+After applying the preset, confirm you can hear your neighbours on the configured settings.
 
 ::: cli "New radio settings"
 ```
@@ -156,16 +152,8 @@ Bandwidth:  62.5 kHz
 ```
 :::
 
-## Phase 8 — Strict region forwarding
-
-Approximately one month after the main switch, the community will enable strict region forwarding. This turns the mesh into connected regional zones — problems or congestion in one area no longer cascade across the whole network, and adverts are scoped to their region.
-
-Phase 8 date: **18 July 2026.** Only step 8 needs to happen on this date.
-
-This date has been postponed to allow more time for region adoption across the mesh. Wide region adoption is a pre-requisite for strict forwarding: enabling `region denyf *` before enough nodes carry a region tag would cause the mesh to silently drop a significant portion of traffic.
-
-::: step 08 "Strict region forwarding" "<span style='color:var(--c-red)'>postponed</span> · 18 Jul 2026"
-Apply the final region command on your repeater. This instructs your repeater to silently drop any incoming packet that carries no region scope — from this point, every message entering your repeater must carry an explicit region tag. This creates a strong incentive for all operators to configure regions correctly, and results in a more stable and reliable mesh for the whole community.
+::: step 08 "Strict region forwarding" "region denyf *"
+After completing step 4, enable strict forwarding. It drops only packets with **no region tag at all**, preventing unscoped traffic from being repeated across the whole EU. Scoped traffic to neighbouring provinces, the Netherlands, and other EU countries remains unaffected.
 
 From the **UI**: In the Manage Regions screen, set **Deny Flood** in the **Packets without region set** option.
 
@@ -175,7 +163,6 @@ region denyf *
 region save
 ```
 :::
-Strict forwarding only blocks packets that carry **no region tag at all** (and would otherwise be repeated across the whole of the EU, increasing congestion). It does not prevent communication with neighbouring provinces, with the whole country, or with the countries in the EU. It does however require better understanding of the technology.
 
 ## Troubleshooting
 
@@ -187,7 +174,7 @@ If connections are weak after applying SF7, changing the coding rate from CR5 to
 
 **Multibyte path (step 5)**
 
-For multi-byte path to work, your companion app must be set correctly in Experimental Settings, and all repeaters along your path must be running firmware v1.14 or later. A repeater that switched but did not update its firmware will not forward your multi-byte path messages.
+For multi-byte path to work, your companion app must be set correctly in Experimental Settings, and all repeaters along your path must be running firmware v1.14 or later. A repeater running older firmware will not forward your multi-byte path messages.
 
 To troubleshoot, disable multi-byte path: in your companion app, set **Experimental Settings → Default Path Hash Size = 1-byte**.
 
@@ -203,11 +190,20 @@ set path.hash.mode 0
 
 If regions are not configured correctly on your neighbours' repeaters, the scoped messages you send from your companion will not be understood and will be dropped. To troubleshoot, disable the scope on the channel where you are sending messages — if the problem goes away, it points to a region misconfiguration in your local mesh.
 
+## Why we switched
+
+The Meshcore mesh network in the Netherlands was heavily congested and increasingly unreliable. Community testing in March 2026 confirmed that switching to SF7 significantly increases network capacity and improves reliability for everyone.
+
+Following these results, the Dutch mesh adopted the current SF7 radio settings on **9 May 2026**.
+
+- [Test preparation (PDF) ↗](https://assets.woodwar.com/meshcore_sf_test_plan.pdf) — the test plan, procedure, and settings used during the March 2026 weekend test
+- [Test report (PDF) ↗](https://assets.woodwar.com/meshcore_sf_test_report.pdf) — full analysis of the results, including data, findings, and the recommendation to switch to SF7
+
 ## Resources
 
 <div class="resources">
   <a href="https://assets.woodwar.com/meshcore_sf7_switch_instructions.pdf" target="_blank" rel="noopener" class="resource-link">
-    Switch instructions
+    Historical switch instructions
     <span class="resource-link__arrow">PDF document ↗</span>
   </a>
   <a href="https://mc-radar.woodwar.com/mesh-health" target="_blank" rel="noopener" class="resource-link">

@@ -299,8 +299,8 @@ h2 {
   color: var(--c-fg);
 }
 
-/* ── Preparation steps grid ─────────────────────────────────────────────── */
-.steps-prep {
+/* ── Configuration steps grid ───────────────────────────────────────────── */
+.steps-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1px;
@@ -357,27 +357,10 @@ h2 {
   opacity: 0.85;
 }
 
-/* Switch day step — full-width, red accented */
-#step-07 {
-  border-top: 3px solid var(--c-red);
-  background: #FEF9F9;
-  margin-top: 1rem;
-  border: 1px solid var(--c-rule);
-  border-top: 3px solid var(--c-red);
-}
-
-/* Phase 8 step — full-width, purple accented */
-#step-08 {
-  background: #FAF5FE;
-  margin-top: 1rem;
-  border: 1px solid var(--c-rule);
-  border-top: 3px solid var(--c-purple);
-}
-#step-08 .step__num {
-  color: var(--c-purple);
-}
-#step-08 .step__summary {
-  color: var(--c-purple);
+/* Keep the unused ninth grid cell visually empty on desktop. */
+.steps-grid::after {
+  content: "";
+  background: var(--c-bg);
 }
 
 /* ── :::more popover ─────────────────────────────────────────────────────── */
@@ -622,13 +605,13 @@ h2 {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 1px;
-  background: var(--c-rule);
-  border: 1px solid var(--c-rule);
+  background: transparent;
   margin-block: 1.25rem 0;
 }
 .resource-link {
   display: block;
   background: var(--c-bg);
+  box-shadow: 0 0 0 1px var(--c-rule);
   padding: 1.125rem 1.25rem;
   text-decoration: none;
   color: var(--c-fg);
@@ -671,8 +654,11 @@ h2 {
 
 /* ── Responsive ──────────────────────────────────────────────────────────── */
 @media (max-width: 900px) {
-  .steps-prep {
+  .steps-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .steps-grid::after {
+    display: none;
   }
   .settings-table tbody {
     grid-template-columns: repeat(2, 1fr);
@@ -683,7 +669,7 @@ h2 {
   :root {
     --pad-x: 1.25rem;
   }
-  .steps-prep {
+  .steps-grid {
     grid-template-columns: 1fr;
   }
   .settings-table tbody {
@@ -703,7 +689,8 @@ h2 {
 /* ── Print ───────────────────────────────────────────────────────────────── */
 @media print {
   .page-stripe, .site-header__nav, .more, .cli__copy, .site-footer { display: none; }
-  .steps-prep { grid-template-columns: repeat(2, 1fr); }
+  .steps-grid { grid-template-columns: repeat(2, 1fr); }
+  .steps-grid::after { display: none; }
   .step { break-inside: avoid; }
 }
 
