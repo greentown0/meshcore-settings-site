@@ -9,10 +9,13 @@ eleventyExcludeFromCollections: true
   <title>Meshcore Netherlands</title>
   <script>
     var lang = (navigator.language || '').toLowerCase();
-    location.replace(lang.startsWith('nl') ? '/nl/' : '/en/');
+    location.replace(
+      lang.startsWith('nl') ? '/nl/' :
+      lang.startsWith('de') ? '/de/' : '/en/'
+    );
   </script>
 </head>
 <body>
-  <p><a href="/en/">English</a> · <a href="/nl/">Nederlands</a></p>
+  <p><a href="/en/">English</a> · <a href="/nl/">Nederlands</a> · <a href="/de/">Deutsch</a></p>
 </body>
 </html>

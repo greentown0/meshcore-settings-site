@@ -62,12 +62,23 @@
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23D42B2B'/><text y='.85em' font-size='72' font-family='sans-serif' fill='white' font-weight='900' text-anchor='middle' x='50'>M</text></svg>">
 
-  <!-- Fonts -->
+  <!-- Fonts (shared DMC stack: Aldrich + IBM Plex Sans + IBM Plex Mono) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Barlow:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Aldrich&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="/assets/main.css">
+
+  <!-- Pre-paint theme: apply the saved theme before first paint to avoid a flash.
+       Dark is the default (no data-theme attribute), matching the DMC apps. -->
+  <script>
+    try {
+      var t = localStorage.getItem("meshcore-theme") || "dark";
+      var light = t === "light" ||
+        (t === "system" && window.matchMedia("(prefers-color-scheme: light)").matches);
+      if (light) document.documentElement.setAttribute("data-theme", "light");
+    } catch (e) {}
+  </script>
 </head>
 <body>
   <div class="page-stripe" aria-hidden="true"></div>
@@ -76,18 +87,36 @@
     <div class="container">
       <div class="site-header__inner">
         <a href="/{{ lang | default('en') }}/" class="site-header__name">{{ brand | default('Meshcore Netherlands') }}</a>
+        {% set theme_system = 'Systeem' if lang == 'nl' else 'System' %}
+        {% set theme_dark = 'Donker' if lang == 'nl' else ('Dunkel' if lang == 'de' else 'Dark') %}
+        {% set theme_light = 'Licht' if lang == 'nl' else ('Hell' if lang == 'de' else 'Light') %}
         <div class="site-header__actions">
           <a href="https://assets.woodwar.com/meshcore_sf7_switch_instructions.pdf" target="_blank" rel="noopener" class="site-header__link">
             {{ nav_switch_link }} <span aria-hidden="true">↗</span>
           </a>
           <span class="site-header__sep" aria-hidden="true"></span>
-          <nav class="lang-switcher" aria-label="{{ lang_switcher_aria_label }}">
-            {% if lang == 'nl' %}
-            <a href="/en/" class="lang-switcher__btn" lang="en" hreflang="en">EN</a>
-            {% else %}
-            <a href="/nl/" class="lang-switcher__btn" lang="nl" hreflang="nl">NL</a>
-            {% endif %}
-          </nav>
+
+          <div class="dd" id="lang-dd">
+            <button type="button" class="dd-trig" aria-haspopup="true" aria-expanded="false" aria-label="{{ lang_switcher_aria_label }}">
+              <span class="dd-code">{{ (lang | default('en')) | upper }}</span><span class="dd-caret" aria-hidden="true">▾</span>
+            </button>
+            <div class="dd-menu" role="menu">
+              <a href="/nl/" class="dd-item" lang="nl" hreflang="nl" role="menuitemradio" aria-checked="{{ 'true' if lang == 'nl' else 'false' }}">Nederlands<span class="chk" aria-hidden="true">✓</span></a>
+              <a href="/en/" class="dd-item" lang="en" hreflang="en" role="menuitemradio" aria-checked="{{ 'true' if lang == 'en' else 'false' }}">English<span class="chk" aria-hidden="true">✓</span></a>
+              <a href="/de/" class="dd-item" lang="de" hreflang="de" role="menuitemradio" aria-checked="{{ 'true' if lang == 'de' else 'false' }}">Deutsch<span class="chk" aria-hidden="true">✓</span></a>
+            </div>
+          </div>
+
+          <div class="dd" id="theme-dd">
+            <button type="button" class="dd-trig" aria-haspopup="true" aria-expanded="false" aria-label="Theme">
+              <span id="theme-icon" class="dd-ico">&#127769;</span><span class="dd-caret" aria-hidden="true">▾</span>
+            </button>
+            <div class="dd-menu" role="menu">
+              <button type="button" data-set-theme="system" role="menuitemradio" aria-checked="false"><span class="dd-ico">&#128421;</span>{{ theme_system }}<span class="chk" aria-hidden="true">&#10003;</span></button>
+              <button type="button" data-set-theme="dark" role="menuitemradio" aria-checked="true"><span class="dd-ico">&#127769;</span>{{ theme_dark }}<span class="chk" aria-hidden="true">&#10003;</span></button>
+              <button type="button" data-set-theme="light" role="menuitemradio" aria-checked="false"><span class="dd-ico">&#9728;</span>{{ theme_light }}<span class="chk" aria-hidden="true">&#10003;</span></button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -1,10 +1,87 @@
 (function () {
   "use strict";
 
-  var isNl = document.documentElement.lang === "nl";
-  var copyLabel   = isNl ? "Kopieer"      : "Copy";
-  var copiedLabel = isNl ? "Gekopieerd!"  : "Copied!";
-  var copyAriaLabel = isNl ? "Kopieer opdrachten" : "Copy commands";
+  // ── Dropdown controls (chip trigger + floating menu), matching the DMC navbar ─
+  var dropdowns = Array.prototype.slice.call(document.querySelectorAll(".dd"));
+
+  function closeDropdowns(except) {
+    dropdowns.forEach(function (dd) {
+      if (dd === except) return;
+      dd.classList.remove("open");
+      var trig = dd.querySelector(".dd-trig");
+      if (trig) trig.setAttribute("aria-expanded", "false");
+    });
+  }
+
+  dropdowns.forEach(function (dd) {
+    var trig = dd.querySelector(".dd-trig");
+    var menu = dd.querySelector(".dd-menu");
+    if (!trig) return;
+    trig.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var open = !dd.classList.contains("open");
+      closeDropdowns(dd);
+      dd.classList.toggle("open", open);
+      trig.setAttribute("aria-expanded", String(open));
+    });
+    if (menu) menu.addEventListener("click", function (e) { e.stopPropagation(); });
+  });
+
+  document.addEventListener("click", function () { closeDropdowns(); });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") closeDropdowns();
+  });
+
+  // ── Theme (system / dark / light), persisted to localStorage ─────────────────
+  var themeButtons = Array.prototype.slice.call(document.querySelectorAll("[data-set-theme]"));
+  var themeIcon = document.getElementById("theme-icon");
+  var THEME_ICONS = { system: "🖥", dark: "🌙", light: "☀" };
+  var lightMql = window.matchMedia("(prefers-color-scheme: light)");
+
+  function applyTheme(pref) {
+    var light = pref === "light" || (pref === "system" && lightMql.matches);
+    if (light) document.documentElement.setAttribute("data-theme", "light");
+    else document.documentElement.removeAttribute("data-theme");
+  }
+
+  function setTheme(pref) {
+    applyTheme(pref);
+    themeButtons.forEach(function (b) {
+      b.setAttribute("aria-checked", String(b.getAttribute("data-set-theme") === pref));
+    });
+    if (themeIcon) themeIcon.textContent = THEME_ICONS[pref] || THEME_ICONS.dark;
+    try { localStorage.setItem("meshcore-theme", pref); } catch (e) {}
+  }
+
+  themeButtons.forEach(function (b) {
+    b.addEventListener("click", function () {
+      setTheme(b.getAttribute("data-set-theme"));
+      closeDropdowns();
+    });
+  });
+
+  if (lightMql.addEventListener) {
+    lightMql.addEventListener("change", function () {
+      var pref = "dark";
+      try { pref = localStorage.getItem("meshcore-theme") || "dark"; } catch (e) {}
+      if (pref === "system") applyTheme("system");
+    });
+  }
+
+  var savedTheme = "dark";
+  try { savedTheme = localStorage.getItem("meshcore-theme") || "dark"; } catch (e) {}
+  setTheme(savedTheme);
+
+  var lang = document.documentElement.lang;
+  var COPY = {
+    nl: { label: "Kopieer",  done: "Gekopieerd!", aria: "Kopieer opdrachten" },
+    de: { label: "Kopieren", done: "Kopiert!",    aria: "Befehle kopieren" },
+    en: { label: "Copy",     done: "Copied!",     aria: "Copy commands" }
+  };
+  var copyStrings = COPY[lang] || COPY.en;
+  var copyLabel   = copyStrings.label;
+  var copiedLabel = copyStrings.done;
+  var copyAriaLabel = copyStrings.aria;
 
   // ── Wrap configuration steps in a CSS grid ──────────────────────────────
   // Steps are siblings in the DOM; we group them here so no markdown
