@@ -33,6 +33,8 @@ howto_steps:
 | Bandbreite | 62.5 kHz |
 | Advert-Intervall | 47 h+ (flood) |
 | Firmware | v1.15+ |
+| Region (Companion) | Pro Kanal wählen |
+| Pfad-Hash (Companion) | 2-byte |
 :::
 
 ## Empfohlene Konfiguration

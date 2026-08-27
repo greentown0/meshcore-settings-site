@@ -467,6 +467,8 @@ h2 {
   line-height: 1.1;
   color: var(--c-heading);
 }
+/* Filler for the trailing empty grid cell (8 cells across 3 columns) */
+.settings-table tbody::after { content: ""; background: var(--c-cell); }
 
 /* ── Configuration steps grid ───────────────────────────────────────────── */
 .steps-grid {
@@ -760,6 +762,7 @@ h2 {
   .steps-grid { grid-template-columns: repeat(2, 1fr); }
   .steps-grid::after { display: none; }
   .settings-table tbody { grid-template-columns: repeat(2, 1fr); }
+  .settings-table tbody::after { display: none; }
 }
 @media (max-width: 600px) {
   :root { --pad-x: 1.25rem; }

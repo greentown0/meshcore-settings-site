@@ -33,6 +33,8 @@ howto_steps:
 | Bandwidth | 62.5 kHz |
 | Advert interval | 47 h+ (flood) |
 | Firmware | v1.15+ |
+| Region (companion) | Select per channel |
+| Path hash (companion) | 2-byte |
 :::
 
 ## Recommended configuration

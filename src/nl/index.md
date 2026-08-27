@@ -33,6 +33,8 @@ howto_steps:
 | Bandbreedte | 62.5 kHz |
 | Advert interval | 47 u+ (flood) |
 | Firmware | v1.15+ |
+| Regio (companion) | Selecteer per kanaal |
+| Pad-hash (companion) | 2-byte |
 :::
 
 ## Aanbevolen configuratie
